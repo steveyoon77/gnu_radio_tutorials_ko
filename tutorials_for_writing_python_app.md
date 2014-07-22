@@ -115,7 +115,7 @@
 
   6번째 줄부터 17번째 줄까지는 또 다른 클래스인 gr.top_block으로부터 상속받은 my_top_block이라는 클래스를 정의합니다. 이 클래스는 기본적으로 흐름 그래프를 위한 컨테이너입니다. gr.top_block 클래스를 상속받음으로써, 여러분은 블록을 추가하고 그것들을 연결하기 위해 필요한 모든 hooks과 함수들을 얻을 수 있습니다.
 
-  오직 한 멤버 함수만이 이 클래스에 정의되어 있습니다: _\_\_init\_\_()_는 이 클래스의 생성자입니다. 이 함수의 첫번째 줄에서(8번째 줄), 부호 생성자가 호출됩니다(파이썬에서, 이것은 명시적으로 요구됩니다. 파이썬의 대부분이 명시적으로 작성되도록 요구됩니다. 사실, 이것이 파이썬의 주요 원칙입니다.). 다음으로, 두개의 변수가 정의되었습니다: _sample\_rate_와 _ample_. 이들이 신호 생성기의 sampling rate와 amplitute를 제어할 것 입니다.
+  오직 한 멤버 함수만이 이 클래스에 정의되어 있습니다. _\_\_init\_\_()_ 는 이 클래스의 생성자입니다. 이 함수의 첫번째 줄에서(8번째 줄), 부호 생성자가 호출됩니다(파이썬에서, 이것은 명시적으로 요구됩니다. 파이썬의 대부분이 명시적으로 작성되도록 요구됩니다. 사실, 이것이 파이썬의 주요 원칙입니다.). 다음으로, 두개의 변수가 정의되었습니다. _sample\_rate_ 와 _ample_. 이들이 신호 생성기의 sampling rate와 amplitute를 제어할 것 입니다.
 
   다음 줄을 설명하기 전에, 이전 섹션에 세 개의 블록과 두 개의 경계로 구성된 흐름 그래프 차트를 보셨으면 합니다. 블록들은 13번째 줄부터 15번째 줄까지 정의되어 있습니다: 두 개의 [신호원](http://gnuradio.org/doc/doxygen/classgr_1_1analog_1_1sig__source__f.html)이 생성됩니다(_src0_과 _src1_). 이들 입력원은 주어진 주파수(350과 440Hz)와 주어진 sampling rate(32kHz)로 지속적으로 사인파를 생성합니다. 진폭은 _ampl_ 변수로 조절되고 0.1로 셋팅되었습니다. 블록 형 _analog.sig\_source\_f_의 접미사 "f"는 출력이 _float_이라는 것을 지시합니다. 이것은 오디오 싱크가 -1에서 1 사이의 범위에서 부동소수점 샘플을 허용하기 때문에 좋습니다. 이런 종류의 것들은 프로그래머가 주의해서 다루어야 합니다: 비록 GNU Radio가 연결이 올바른지 확인하지만, 수동으로 주의해서 다루어야 하는 것이 여전히 있습니다. 예를 들어, 여러분이 정수 샘플들을 _audio.sink_로 보내고 싶다면, GNU Radio는 에러를 낼 것 입니다. 하지만 여러분이 위의 예제에서 진폭을 1보다 큰 어떤 값으로 셋팅한다면 에러가 아닌 왜곡된 신호를 얻을 것 입니다.
 
@@ -123,7 +123,7 @@
 
   16번째와 17번째 줄은 블록들을 연결합니다. 블록들을 연결하는 일반적인 문법은 _self.connect(block1, block2, block3, ...)_입니다. 이것은 _block1_의 출력과 _block2_의 입력을 열견하고, _block2_의 출력과 _block3_의 입력을 연결하는 식으로 계속 연결합니다. 여러분은 _connect()_를 한 번 호출함으로써 여러분이 원하는 만큼의 block들을 연결할 수 있습니다. 여기, 우리는 _src0_와 _dst_의 첫번째 입력과 연결하고 _src1_과 _dst_의 두번째 입력에 연결하기를 원하므로 특별한 문법이 필요합니다. _self.connect (src0, (dst, 0))_이 바로 그것을 수행합니다: 그것은 명백하게 _src0_와 _dst_의 port 0를 연결합니다. _(dst, 0)_은 파이썬 용어로 "tuple"이라고 불립니다. 그것은 _self.connect()_를 호출할 때 port 번호를 명세 합니다. port 번호가 0일 때 block은 port 번호를 안쓸 수 있습니다. 그러므로 16번째 줄은 다음과 같이 쓸 수 있습니다.
 
-  self.connect((src0, 0), (dst, 0))
+    self.connect((src0, 0), (dst, 0))
 
   흐름 그래프를 만드는 모든 것을 다 했습니다. 마지막 5 줄(22번째 줄)은 흐름 그래프를 시작하는데 관련이 없습니다. 이 _try_와 _except_ 구문은 단순히 흐름 그래프가 Ctrl+C가 눌렸을 때(이것은 _KeyboardInterrupt_ 파이썬 예외를 발생합니다)  (안그랬으면 무한히 돌아갔을) 흐름 그래프가 멈춰지는 것을 확인하는 것 입니다.
 
@@ -141,3 +141,36 @@
 * 블록들은 흐름 그래프 클래스 내에서 _self.connect()_를 호출함으로써 연결됩니다.
 * 여러분께서 지금 기초 파이썬 코드를 작성하는데 편안함을 느끼지 못하신다면, 몇몇 파이썬 튜토리얼을 다 끝낼때까지 잠시 멈추십시오.
 
+# <a name="coding-python-gnu-radio-app"></a>Coding Python GNU Radio Applications
+
+  위의 예제에서 파이썬 GNU Radio 응용프로그램 작성법에 대해 이미 꽤 많은 부분을 다루었습니다. 이 챕터와 다음 챕터에서 GNU Radio 응용프로그램의 가능성과 어떻게 그것을 이용할지 보여드리려 합니다. 지금부터, 순차적으로 읽으실 필요가 없습니다. 소제목을 보면서 여러분이 먼저 보고 싶으신 것부터 보십시오.
+
+## <a name="gnu-radio-module"></a>GNU Radio Modules
+
+  GNU Radio에는 매우 많은 라이브러리들과 모듈들이 있습니다. 여러분은 대게 다음의 문법으로 모듈들을 추가할 것 입니다.
+
+    from gnuradio import MODULENAME
+  
+  모듈들은 좀 다르게 동작합니다. 다음은 가장 흔히 사용되는 모듈들입니다.
+
+  MODULENAME  |설명
+  ------------|----
+  gr          |Main GNU Radio 라이브러리. 거의 항상 이것을 포함해야 합니다.
+  analog      |아날로그 신호나 아날로그 변조와 관련된 어떤 것들
+  audio       |사운드 카드 제어(신호원들, 싱크들). 이것으로 사운드 카드에 오디오를 보내거나 받을 수 있지만, 확장 RF 프론트엔드와 협대역 리시버로서 사운드카드를 이용할 수도 있습니다.
+  blocks      |기타 블록들. 만약 어떤 카테고리에 들어가 있지 않다면 이곳에 있을겁니다.
+  channels    |시뮬레이션을 위한 채널 모델들
+  digital     |디지탈 변조와 관련된 것들
+  fec         |Forward Error Correction(FEC)와 관련된 것들
+  fft         |FFT와 관련된 것들
+  filter      |[firdes](http://gnuradio.org/doc/doxygen/classgr_1_1filter_1_1firdes.html)이나 optfir과 같은 필터 블록들과 디자인 툴들
+  plot_data   |Matplotlib로 데이터를 그래프로 그리는(plot) 기능들
+  qtgui       |QT library를 사용하여 데이터를 그래프(time, frequency, spectrogram, constellation, histogram, time raster)로 그리는(plot) 그래픽 툴
+  trellis     |trellis, [trellis coded modulation](http://en.wikipedia.org/wiki/Trellis_modulation), FSM(finite state machine)를 구축하기 위한 블록들과 도구들
+  vocoder     |음성 코딩/디코딩을 다루는 것들
+  wavelet     |wavelets을 다루는 것들
+  wxgui       |여러분의 흐름 그래프로 빠르게 GUI를 만들 수 있는 유틸리티를 포함한 서브 모듈. submodule에 모든 것을 추가하기 위해서는 _from gnuradio.wxgui import \*_ 사용하십시오. 특별한 컴포넌트들을 추가하기 위해서는 _from gnuradio.wxgui import stdgui2, fftsink2_와 같이 사용하십시오. [Graphical User Interfaces](#graphical-user-interfaces)에서 더 많은 정보를 다룹니다.
+  eng_notation|예를 들어 100 * 10^6'를 표시하기 위해 @100M'를 쓰는 것처럼 공학 표기법을 위해 기능들을 추가합니다.
+  eng_options |이 기능을 추가하기 위해 _from gnuradio.eng_options import eng_options_를 사용하십시오. 이 모듈은 공학 표기법을 이해하기 위해 파이썬 _optparse_ 모듈을 확장합니다.
+  gru         |잡다한 유틸리티들, 수학적인 것, 기타 등등
+  
