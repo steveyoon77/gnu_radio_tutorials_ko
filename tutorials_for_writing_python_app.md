@@ -177,3 +177,57 @@ GNU Radio에는 매우 많은 라이브러리들과 모듈들이 있습니다. �
 
 물론 파이썬 스스로도 GNU Radio application을 만들기 위해 몇몇은 필요없을지라도 엄청나게 유용한 많은 모듈들을 갖고 있습니다. 더 많은 정보를 확인하기 위해 파이썬 문서와 [SciPy 웹사이트](http://www.scipy.org/)를 찾아보십시오.
 
+## <a name="choosing-defining-and-configuring-bloks"></a>Choosing, defining, and configuring blocks
+GNU Radio는 미리 정의된 다양한 블록들로 구성되어 있어서 초보자들이 응용프로그램을 만들기 위해 올바른 블록을 찾거나 올바르게 셋팅하는데 자주 어려움을 느끼게 됩니다.
+Doxygen과 Sphinx는 C++과 파이썬 API의 문서 자동화를 위해 이용됩니다.([C++ Manual](http://gnuradio.org/doc/doxygen/index.html), [Python Manual](http://gnuradio.org/doc/sphinx/index.html))
+여러분도 이 문서를 생성할 수 있어서 항상 여러분이 설치한 버전에 맞을 것 입니다. 여러분이 Doxygen과 Sphinx를 설치했다면 CMake로 이것을 자동화 할 수 있습니다.
+
+이 문서화 방법을 배우는 것은 GNU Radio를 이용하는 법을 배우는데 가장 중요한 부분입니다.
+
+실습을 해보겠습니다. 이전 예제로부터 블록을 정의하는 세 개의 줄이 있습니다.
+
+    src0 = analog.sig_source_f (sample_rate, analog.GR_SIN_WAVE, 350, ampl)
+    src1 = analog.sig_source_f (sample_rate, analog.GR_SIN_WAVE, 440, ampl)
+    dst = audio.sink (sample_rate, "")
+
+이 코드가 실행될 때 무슨 일이 일어나는지 간단히 보겠습니다.
+첫번째로, *analog* 모듈의 *sig_source_f* 함수가 실행됩니다. 이 함수는 4개의 인자를 받습니다.
+
+* 파이썬 변수, sample_rate
+* *analog*모듈에서 정의되어 있는([여기](http://gnuradio.org/doc/doxygen/group__waveform__generators__blk.html#gac97c0f42ffb63f1265decceaaeab9177)) 상수, analog.GR_SIN_WAVE
+* sample rate에 비례하는 sine wave의 주파수인 보통의 문자열, 상수 350
+* sine wave의 진폭으로 설정할 변수, ampl
+
+이 함수는 이어서 *src0*에 할당될 클래스를 생성합니다. 비록 sink는 다른 모듈(audio)에서 가져왔지만 다른 두 줄에서도 동일한 일이 생깁니다.
+
+어떤 블록을 사용할지, *analog.sig\_source\_f()*에 무엇을 전달할지 어떻게 알 수 있겠습니까? 문서를 보면 됩니다. 여러분이 Sphinx에서 생성한 문서를 보신다면, "gnuradio.analog"를 클릭 하십시오. "Signal Sources"로 가십시오.
+
+    *analog.sig\_source\_f()*가 GNU Radio 3.7.4에는 없습니다. 하지만 [GNU Radio 3.7.3](http://gnuradio.org/doc/doxygen-3.7.3/classgr_1_1analog_1_1sig__source__f.html)에서 그 클래스를 확인할 수 있습니다. (steveyoon@telechips.com)
+
+여러분은 *sig\_source\_* 족을 포함한  신호 발생기 목록을 찾을 수 있을 겁니다. 접미사는 출력 자료형을 정의합니다.
+
+* f = float
+* c = complex float 
+* i = int
+* s = short int
+* b = bits (정수 형)
+
+이 접미사들은 블록들의 모든 형 정의를 위해 사용됩니다. 예를 들어, *filter.fir\_filter\_ccf()*는 복소수 입력, 복소수 출력, 부동소수점 [Tap](http://www.dspguru.com/dsp/faqs/fir/basics)으로 FIR 필터를 정의하고, *blocks.add\_const\_ss()*는 들어오는 short int를 다른 short int 상수에 더하는 블록을 정의합니다.
+
+비록 여러분이 C++은 건드리고 싶지 않을지라도 대부분의 블록들이 사실 C++로 만들어진 다음 파이썬으로 export된 것이기 때문에 Doxygen으로 만들어진 문서를 보는 것은 가치가 있습니다.
+
+이 시점에서, GNU Radio 커튼 뒤를 좀 가까이 바라보는 것이 좋은 것 같습니다. 여러분이 C++로 작성된 블록을 파이썬에서 쉽게 이용할 수 있는 이유는 GNU Radio가 [SWIG](http://www.swig.org/)이라는 툴을 파이썬과 C++ 간의 인터페이스를 생성하는데 쓰기 때문입니다. 앞에서 언급된 예제에서 *gr::analog::sig\_source\_f::make()*처럼 *gr::component::block::make(\*\*\*)*와 같이 C++에서의 모든 블록들은 생성하는 함수로부터 시작합니다. 이 함수는 항상 그것에 맞는 클래스와 같은 페이지에 문서화 되어 있습니다. 그리고 이 함수가 파이썬에 export 되었습니다.  그래서 파이썬에서 *analog.sig\_source\_f()*는 C++에서 *gr::analog::sig\_source\_f::make()*를 호출합니다. 같은 이유 때문에, 같은 argument(인수)를 갖습니다. - 그것이 여러분이 파이썬에서 블록을 초기화 하는 법을 아는 것 입니다.
+
+    파이썬 모듈은 C++로 먼저 작성된 뒤 파이썬으로 export 된 것이기 때문에 C++ API 문서인 Doxygen 문서를 보면 파이썬에서의 모듈 블록을 초기화 할 때 인자가 무엇인지 알 수 있게 된다는 말 입니다. (steveyoon@telechips.com)
+
+여러분이 Doxygen 문서에서 클래스 *gr::analog::sig\_source\_f*를 불러올 때, *set\_frequency()*같은 많은 다른 클래스 메소드를 보게 될 겁니다. 이 함수들은 파이썬으로도 export되었습니다. 그래서 여러분이 만약 한 신호원을 생성했었고 주파수를 변경하기를 원한다면 이 메소드를 여러분의 파이썬으로 정의된 블록에 사용할 수 있습니다.
+
+    # We're in some cool application here
+    src0 = analog.sig_source_f (sample_rate, analog.GR_SIN_WAVE, 350, ampl)
+    # Other, fantastic things happen here
+    src0.set_frequency (880) # Change frequency
+
+이 코드는 첫번째 신호발생기의 주파수를 880Hz로 변경할 것 입니다.
+
+희망스럽게도, GNU Radio 문서는 점점 완성도 높아지고 있습니다. 그러나 블록의 상세한 동작을 완전히 이해하기 위해서는, 얼마나 좋은 문서를 갖고 있든지 간에 바로 코드를 보시거나 나중에라도 보셔야 할 것 입니다. 
+
