@@ -244,3 +244,74 @@ Doxygen과 Sphinx는 C++과 파이썬 API의 문서 자동화를 위해 이용�
 * 싱글 비트들을 처리할 때에는 주의를 하십시오. 어떤 경우에는, 보통의 감각으로 바이너리 데이터로 작업해야 할 것 입니다. 어떤 시점의 특정 개수의 비트들을 다루고 싶어지는 경우도 생깁니다. 이것을 위해 *packed_to_unpacked\**와 *unpacked\_to\_packed\** 블록을 보십시오.
 * 동적 범위를 다룰 때는 주의를 기울이십시오. 부동소수점형이나 복소수형을 사용할 때, 고려하는 기계에서 필요로 하는 것보다 더 큰 범위를 가집니다. 그러나 어떤 싱크와 소스들은 여러분이 고정되길 필요로 하는 특별한 범위를 갖기도 합니다. 예를 들어, 오디오 싱크들은 +-1 사이의 샘플들을 필요로 하고 이 범위를 벗어나면 잘려집니다. 반면에 USRP 싱크는 DAC의 동적 범위 때문에 -32768부터 32767까지의 범위를 갖습니다.
 
+## <a name="hierarchical-bloks"></a>Hierarchical blocks
+때때로 몇몇 블록을 하나의 블록으로 합치기도 합니다. 여러분이 모두 몇 개의 블록으로 구성된 공통 신호처리 컴포넌트를 가진 몇 개의 응용프로그램을 가졌다고 말해봅시다. 이 블록들은 보통의 GNU Radio 블록이라면 여러분의 응용프로그램에서 사용될 수 있는 새로운 블록으로 결합될 수 있습니다.
+
+예제: 여러분이 FG1과 FG2라는 두 개의 다른 흐름 그래프를 갖고 있다고 합시다. 이 둘은 다른 것들 중에서 블록 B1과 B2를 이용합니다. 여러분은 그것들을 *HierBlock*이라는 계층 구조의 블록에 결합하고 싶어 합니다.
+
+      +-------------------+
+      |  +-----+  +----+  |
+    --+--+ B1  +--+ B2 +--+---
+      |  +-----+  +----+  |
+      |     HierBlock     |
+      +-------------------+
+
+이것이 여러분이 할 것입니다. *gr.hier\_block2*로부터 상속받은 흐름 그래프를 만들고, 소스와 싱크로서 *self*를 이용합니다.
+
+    class HierBlock(gr.hier_block2):
+        def __init__(self, audio_rate, if_rate):
+            gr.hier_block2.__init__(self, "HierBlock",
+                           gr.io_signature(1, 1, gr.sizeof_float),
+                           gr.io_signature(1, 2, gr.sizeof_gr_complex))
+
+            B1 = blocks.block1(...) # Put in proper code here!
+            B2 = blocks.block2(...)
+
+            self.connect(self, B1, B2, self)
+
+보시다시피, 계층 구조의 블록을 만드는 것은 *gr.top\_block*으로 흐름 그래프를 만드는 것과 매우 비슷합니다. 
+소스와 싱크로서 *self*를 이용하는 것과 별개로, 또 다른 차이가 있습니다. (세번째 줄에서 호출되는) 부모 클래스의 생성자가 추가적인 정보를 받도록 합니다. *gr.hier\_block2.\_\_init\_\_()* 호출에 4개의 파라미터가 필요합니다.
+* self (항상 첫번째 인수로 생성자를 전달합니다.)
+* 계층 구조 블록을 위한 식별자로서 문자열 (편리한대로 바꾸십시오)
+* 입력 서명
+* 출력 서명
+
+마지막 두 개는 여러분이 이미 C++로 자신의 블록들 작성했을지라도 추가적인 설명이 요구됩니다. GNU Radio는 블록에서 사용하는 입력과 출력의 자료형이 무엇인지 알아야만 합니다. 입출력 서명을 만드는 것은 *gr.io\_signature()*를 호출함으로서 완료될 수 있습니다. 이 함수는 3개의 인수를 가지고 호출됩니다.
+* 포트의 최소 개수
+* 최대 포트의 개수
+* 입출력 요소의 크기
+
+계층 구조 블록 *HierBlock*에서 여러분은 정확히 하나의 입력과 하나 또는 두 개의 출력을 볼 수 있습니다. 들어오는 객체는 부동소수점 크기를 가지고 있어서, 블록은 들어온 부동소수점수 실수를 처리합니다. B1 또는 B2의 어딘가에서 데이터는 복소 부동소수점 수 값으로 변환됩니다. 그래서 출력 서명이 나가는 객체의 크기를 *gr.sizeof\_gr\_complex*의 크기로 선언됩니다. *gr.sizeof\_float*와 *gr.sizeof\_gr\_complex*는 C++에서 *sizeof()를 호출하여 얻은 반환값과 같습니다. 다른 선정의된 상수들은 
+* gr.sizeof_int
+* gr.sizeof_short
+* gr_sizeof_char
+입니다.
+
+특별히 소스와 싱크로서 계층 구조 블록을 정의하는 것으로서, null IO 서명을 생성하기 위해 gr.io\_signature(0,0,0)을 이용합니다. 
+
+그것이 다 입니다. 이제 여러분은 보통 블록을 사용하여 *HierBlock* 쓸 수 있습니다. 예를 들면, 같은 파일에서 이 코드를 넣을 수 있습니다.
+
+    class FG1(gr.top_block):
+      def __init__(self):
+          gr.top_block.__init__(self)
+
+      ... # Sources and other blocks are defined here
+      other_block1 = blocks.other_block()
+      hierblock    = HierBlock()
+      other_block2 = blocks.other_block()
+
+      self.connect(other_block1, hierblock, other_block2)
+
+      ... # Define rest of FG1
+물론 파이썬 모듈화를 하기 위해 *HierBlock*을 위한 코드를 *hier\_lock.py*라는 외부 파일에 넣을 수도 있습니다. 다른 파일로부터 이 블록을 이용하기 위해 간단히 여러분의 코드에 import 지시자를 추가하시면 됩니다.
+
+    from hier_block import HierBlock
+
+그리고 앞서 언겁된것처럼 *HierBlock*을 이용하실 수 있습니다.
+
+Hierarchical 블록들의 예는 다음과 같습니다.
+
+    gr-uhd/examples/python/fm_tx_2_daughterboards.py
+    gr-uhd/examples/python/fm_tx4.py
+    gr-digital/examples/narrowband/tx_voice.py
+
