@@ -1,10 +1,14 @@
+% Tutorials for writing Python applications
+% Author: GNU Radio contributors
+% Translator: Yoon Kyong Lok(steveyoon@telechips.com)
+
 # <a name="Introduction"></a>Introduction
 GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 여러분은 아마 GNU Radio가 어떻게 동작하는지, 그게 무엇이고 무엇을 할 수 있는지에 대해서 다소 기초적인 지식을  이미 알고 있을 것 입니다. 그리고 이제 여러분 스스로 환상적인 오픈 소스 디지털 신호처리의 세계에 들어가길 원할 겁니다.
 이 튜토리얼은 GNU Radio 3.7 버전을 이용하여 어떻게 Python으로 GNU Radio application을 작성하는지에 대한 것 입니다. 프로그래밍이나, 소프트웨어 라디오, 신호처리에 대한 것이 아니라, 새로운 블록을 추가하거나 소스 트리에 코드를 추가하여 GNU Radio를 어떻게 확장할지에 대한 것입니다. 여러분이 저런 주제(프로그래밍, 소프트웨어 라디오나 신호처리)에 대해 백그라운드를 가지고 계시고 GNU Radio로 작업을 시작했다면 이것은 아마 여러분에게 올바른 튜토리얼일 것 입니다. 여러분이 소프트웨어 라디오에 대해서 잘 모르신다거나 FIR filter가 무엇을 하는지 잘 모르신다면 여러분은 먼저 신호처리 이론에 대해서 견고한 백그라운드를 습득하셔야 할 것 입니다. 무엇인가를 배우는 가장 좋은 길은 해보는 것 입니다.
 비록 이 튜토리얼이 여러분에게 GNU Radio에 대해서 가능한 쉽게 소개하려고 디자인됐지만, 완벽한 가이드는 아닐 겁니다. 사실, 저는 때때로 단순히 더 쉽게 설명하기 위해 진실을 말하지 않을 것 입니다. 저는 또 이후의 챕터들에서 스스로에게 모순된 말을 할 것 입니다. GNU Radio application들을 개발하기 위해서는 여전히 머리를 좀 쓰셔야 할 것 입니다.
 
 # <a name="Preliminaries"></a>Preliminaries
-이 튜토리얼을 시작하기 전에 GNU Radio가 설치되어 동작하는지 확인하십시오. USRP는 반드시 필요하지 않지만, 어떤 종류의 쏘쓰(입력원)과 sink (USRP, 오디오나 다른 하드웨어)가, 비록 엄격히 요구되는건 아니지만, 도움이 될 것입니다. GNU Radio 예제들(gr-audio/examples/python 안의 dial_tone.py과 같은)이 동작한다면 시작할 준비가 되신 것 입니다.
+이 튜토리얼을 시작하기 전에 GNU Radio가 설치되어 동작하는지 확인하십시오. USRP는 반드시 필요하지 않지만, 어떤 종류의 쏘쓰(입력원)과 sink (USRP, 오디오나 다른 하드웨어)가, 비록 엄격히 요구되는건 아니지만, 도움이 될 것입니다. GNU Radio 예제들(gr-audio/examples/python 안의 dial\_tone.py과 같은)이 동작한다면 시작할 준비가 되신 것 입니다.
 여러분은 프로그래밍에 대한 백그라운드를 가지고 있어야 합니다. 하지만 여러분이 파이썬으로 프로그램을 해본적이 없더라도 걱정하지 마십시오. 파이썬은 배우기에 매우 쉬운 언어입니다.
 
 # <a name="Understanding-flow-graphs"></a>Understanding flow graphs
@@ -37,7 +41,7 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
     | Sine generator (440Hz) +---+
     +------------------------+
 
-이 간단한 예제는 종종 "Hello World of GNU Radio"라고 불립니다. 첫번째 예제와 달리, 두 개의 쏘쓰(입력원)를 가지고 있습니다. 반면에 싱크는 두 개의 입력(이 경우는 사운드 카드의 왼쪽과 오른쪽 채널)을 가지고 있습니다. 이 예제의 소스코드는 gr-audio/examples/python/dial_tone.py에 있습니다.
+이 간단한 예제는 종종 "Hello World of GNU Radio"라고 불립니다. 첫번째 예제와 달리, 두 개의 쏘쓰(입력원)를 가지고 있습니다. 반면에 싱크는 두 개의 입력(이 경우는 사운드 카드의 왼쪽과 오른쪽 채널)을 가지고 있습니다. 이 예제의 소스코드는 gr-audio/examples/python/dial\_tone.py에 있습니다.
 
 ### <a name="QPSK-Demodulator"></a>QPSK Demodulator
 
@@ -70,7 +74,7 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
     | Audio Source +----------+ NBFM Modulator +---------+  USRP Sink |
     +--------------+          +----------------+         +------------+
 
-이 applicaiton은 두 개의 분리되고 서로 병렬로 동작하는 흐름 그래프들로 구성되어 있습니다. 그것들 중 하나는 Tx(송신) 경로로 다루어지고, 다른 하나는 Rx(수신) 경로로 다루어집니다. 이런 종류의 application은 하나가 동작될 때 다른 하나를 중지시키기 위해 흐름 그래프 외부에 추가적인 코드를 요구할 것 입니다. 두 흐름 그래프는 적어도 하나의 쏘쓰(입력원)와 싱크를 서로 간에 요구합니다. 여러분은 조금더 복잡하지만 gr-uhd/examples/python/usrp_nbfm_ptt.py에서 이것을 수행하는 GNU Radio application을 찾을 수 있습니다.
+이 applicaiton은 두 개의 분리되고 서로 병렬로 동작하는 흐름 그래프들로 구성되어 있습니다. 그것들 중 하나는 Tx(송신) 경로로 다루어지고, 다른 하나는 Rx(수신) 경로로 다루어집니다. 이런 종류의 application은 하나가 동작될 때 다른 하나를 중지시키기 위해 흐름 그래프 외부에 추가적인 코드를 요구할 것 입니다. 두 흐름 그래프는 적어도 하나의 쏘쓰(입력원)와 싱크를 서로 간에 요구합니다. 여러분은 조금더 복잡하지만 gr-uhd/examples/python/usrp\_nbfm\_ptt.py에서 이것을 수행하는 GNU Radio application을 찾을 수 있습니다.
 
 ## <a name="Summary1"></a>Summary
 흐름 그래프에 대한 결론을 정리합니다. 여기에 여러분이 정말로 알아야만 하는 중대한 요점을 빠르게 요약합니다.
@@ -82,7 +86,7 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
 
 # <a name="A-first-working-code-example"></a>A first working code example
 다음 단계는 이런 흐름 그래프들을 실제 파이썬에서 어떻게 작성할 수 있는지 아는 것 입니다. 약간의 코드를 한 줄 한 줄 분석하는 것으로 시작해 보도록 하겠습니다. 여러분이 파이썬을 잘 알고 있다면 몇몇 설명은 아마 건너뛰어도 좋을 것 입니다만, 그렇지 않다면 아직 다음 절로 달려가시면 안됩니다. 이 설명은 파이썬과 GNU Radio 초보자 모두를 위한 것 입니다.
-아래의 코드 예제는 [Dial tone generator](#Dial-tone-generator)의 흐름 그래프를 표현한 것 입니다. 실제로 이것은 여러분이 gr-audio/examples/python/dial_tone.py에서 찾을 수 있는 코드 예제를 약간 수정한 버전입니다.
+아래의 코드 예제는 [Dial tone generator](#Dial-tone-generator)의 흐름 그래프를 표현한 것 입니다. 실제로 이것은 여러분이 gr-audio/examples/python/dial\_tone.py에서 찾을 수 있는 코드 예제를 약간 수정한 버전입니다.
 
 	#!/usr/bin/env python
 
@@ -114,19 +118,19 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
 
 6번째 줄부터 17번째 줄까지는 또 다른 클래스인 gr.top_block으로부터 상속받은 my_top_block이라는 클래스를 정의합니다. 이 클래스는 기본적으로 흐름 그래프를 위한 컨테이너입니다. gr.top_block 클래스를 상속받음으로써, 여러분은 블록을 추가하고 그것들을 연결하기 위해 필요한 모든 hooks과 함수들을 얻을 수 있습니다.
 
-오직 한 멤버 함수만이 이 클래스에 정의되어 있습니다. *\_\_init\_\_()*는 이 클래스의 생성자입니다. 이 함수의 첫번째 줄에서(8번째 줄), 부호 생성자가 호출됩니다(파이썬에서, 이것은 명시적으로 요구됩니다. 파이썬의 대부분이 명시적으로 작성되도록 요구됩니다. 사실, 이것이 파이썬의 주요 원칙입니다.). 다음으로, 두개의 변수가 정의되었습니다. _sample\_rate_ 와 _ample_. 이들이 신호 생성기의 sampling rate와 amplitute를 제어할 것 입니다.
+오직 한 멤버 함수만이 이 클래스에 정의되어 있습니다. *\_\_init\_\_()*는 이 클래스의 생성자입니다. 이 함수의 첫번째 줄에서(8번째 줄), 부호 생성자가 호출됩니다(파이썬에서, 이것은 명시적으로 요구됩니다. 파이썬의 대부분이 명시적으로 작성되도록 요구됩니다. 사실, 이것이 파이썬의 주요 원칙입니다.). 다음으로, 두개의 변수가 정의되었습니다. *sample\_rate* 와 *ample*. 이들이 신호 생성기의 sampling rate와 amplitute를 제어할 것 입니다.
 
-다음 줄을 설명하기 전에, 이전 섹션에 세 개의 블록과 두 개의 경계로 구성된 흐름 그래프 차트를 보셨으면 합니다. 블록들은 13번째 줄부터 15번째 줄까지 정의되어 있습니다: 두 개의 [신호원](http://gnuradio.org/doc/doxygen/classgr_1_1analog_1_1sig__source__f.html)이 생성됩니다(_src0_과 _src1_). 이들 입력원은 주어진 주파수(350과 440Hz)와 주어진 sampling rate(32kHz)로 지속적으로 사인파를 생성합니다. 진폭은 _ampl_ 변수로 조절되고 0.1로 셋팅되었습니다. 블록 형 _analog.sig\_source\_f_의 접미사 "f"는 출력이 _float_이라는 것을 지시합니다. 이것은 오디오 싱크가 -1에서 1 사이의 범위에서 부동소수점 샘플을 허용하기 때문에 좋습니다. 이런 종류의 것들은 프로그래머가 주의해서 다루어야 합니다: 비록 GNU Radio가 연결이 올바른지 확인하지만, 수동으로 주의해서 다루어야 하는 것이 여전히 있습니다. 예를 들어, 여러분이 정수 샘플들을 _audio.sink_로 보내고 싶다면, GNU Radio는 에러를 낼 것 입니다. 하지만 여러분이 위의 예제에서 진폭을 1보다 큰 어떤 값으로 셋팅한다면 에러가 아닌 왜곡된 신호를 얻을 것 입니다.
+다음 줄을 설명하기 전에, 이전 섹션에 세 개의 블록과 두 개의 경계로 구성된 흐름 그래프 차트를 보셨으면 합니다. 블록들은 13번째 줄부터 15번째 줄까지 정의되어 있습니다: 두 개의 [신호원](http://gnuradio.org/doc/doxygen/classgr_1_1analog_1_1sig__source__f.html)이 생성됩니다(*src0*과 *src1*). 이들 입력원은 주어진 주파수(350과 440Hz)와 주어진 sampling rate(32kHz)로 지속적으로 사인파를 생성합니다. 진폭은 _ampl_ 변수로 조절되고 0.1로 셋팅되었습니다. 블록 형 _analog.sig\_source\_f_의 접미사 "f"는 출력이 _float_이라는 것을 지시합니다. 이것은 오디오 싱크가 -1에서 1 사이의 범위에서 부동소수점 샘플을 허용하기 때문에 좋습니다. 이런 종류의 것들은 프로그래머가 주의해서 다루어야 합니다: 비록 GNU Radio가 연결이 올바른지 확인하지만, 수동으로 주의해서 다루어야 하는 것이 여전히 있습니다. 예를 들어, 여러분이 정수 샘플들을 _audio.sink_로 보내고 싶다면, GNU Radio는 에러를 낼 것 입니다. 하지만 여러분이 위의 예제에서 진폭을 1보다 큰 어떤 값으로 셋팅한다면 에러가 아닌 왜곡된 신호를 얻을 것 입니다.
 
 신호 싱크는 15번째 줄에 정의되어 있습니다: _audio.sink()_는 [soundcard control](http://gnuradio.org/doc/doxygen/classgr_1_1audio_1_1sink.html)로서 행동하며 그것에 어떤 샘플을 전송하여 재생하는 블록을 리턴합니다. 먼저 블록 안에서 비록 신호원에 의해 이미 셋팅되었더라도 sampling rate이 명시적으로 셋팅될 필요가 있습니다. GNU Radio는 (그것이 블록들 사이의 정보 흐름의 부분이 아니므로) 올바른 sampling rate를 문맥으로부터 추정할 수 없습니다.
 
-16번째와 17번째 줄은 블록들을 연결합니다. 블록들을 연결하는 일반적인 문법은 _self.connect(block1, block2, block3, ...)_입니다. 이것은 _block1_의 출력과 _block2_의 입력을 열견하고, _block2_의 출력과 _block3_의 입력을 연결하는 식으로 계속 연결합니다. 여러분은 _connect()_를 한 번 호출함으로써 여러분이 원하는 만큼의 block들을 연결할 수 있습니다. 여기, 우리는 _src0_와 _dst_의 첫번째 입력과 연결하고 _src1_과 _dst_의 두번째 입력에 연결하기를 원하므로 특별한 문법이 필요합니다. _self.connect (src0, (dst, 0))_이 바로 그것을 수행합니다: 그것은 명백하게 _src0_와 _dst_의 port 0를 연결합니다. _(dst, 0)_은 파이썬 용어로 "tuple"이라고 불립니다. 그것은 _self.connect()_를 호출할 때 port 번호를 명세 합니다. port 번호가 0일 때 block은 port 번호를 안쓸 수 있습니다. 그러므로 16번째 줄은 다음과 같이 쓸 수 있습니다.
+16번째와 17번째 줄은 블록들을 연결합니다. 블록들을 연결하는 일반적인 문법은 *self.connect(block1, block2, block3, ...)*입니다. 이것은 *block1*의 출력과 *block2*의 입력을 열견하고, *block2*의 출력과 *block3*의 입력을 연결하는 식으로 계속 연결합니다. 여러분은 *connect()*를 한 번 호출함으로써 여러분이 원하는 만큼의 block들을 연결할 수 있습니다. 여기, 우리는 *src0*와 *dst*의 첫번째 입력과 연결하고 _src1_과 *dst*의 두번째 입력에 연결하기를 원하므로 특별한 문법이 필요합니다. *self.connect (src0, (dst, 0))*이 바로 그것을 수행합니다: 그것은 명백하게 *src0*와 *dst*의 port 0를 연결합니다. *(dst, 0)*은 파이썬 용어로 "tuple"이라고 불립니다. 그것은 *self.connect()*를 호출할 때 port 번호를 명세 합니다. port 번호가 0일 때 block은 port 번호를 안쓸 수 있습니다. 그러므로 16번째 줄은 다음과 같이 쓸 수 있습니다.
 
     self.connect((src0, 0), (dst, 0))
 
-흐름 그래프를 만드는 모든 것을 다 했습니다. 마지막 5 줄(22번째 줄)은 흐름 그래프를 시작하는데 관련이 없습니다. 이 _try_와 _except_ 구문은 단순히 흐름 그래프가 Ctrl+C가 눌렸을 때(이것은 _KeyboardInterrupt_ 파이썬 예외를 발생합니다)  (안그랬으면 무한히 돌아갔을) 흐름 그래프가 멈춰지는 것을 확인하는 것 입니다.
+흐름 그래프를 만드는 모든 것을 다 했습니다. 마지막 5 줄(22번째 줄)은 흐름 그래프를 시작하는데 관련이 없습니다. 이 *try*와 *except* 구문은 단순히 흐름 그래프가 Ctrl+C가 눌렸을 때(이것은 *KeyboardInterrupt* 파이썬 예외를 발생합니다)  (안그랬으면 무한히 돌아갔을) 흐름 그래프가 멈춰지는 것을 확인하는 것 입니다.
 
-파이썬 초보자들을 위해, 두 가지 언급을 더 하지 않을 수 없습니다: 여러분은 _my\_top\_block_ 클래스가 이전에 인스턴스를 생성하지 않고 실행되었다는 것을 알아차렸을지 모르겠습니다. 파이썬에서, 특별히 여러분이 어떻게든 오직 하나의 인스턴스만을 얻으려는 클래스를 갖고 있다면 이것은 꽤 상식적인 행동입니다. 하지만, 여러분이 하나의 인스턴스를 생성하든 그 이상의 클래스 인스턴스를 생성하든 인스턴스에서 _run()_ 메소드를 호출해야 합니다.
+파이썬 초보자들을 위해, 두 가지 언급을 더 하지 않을 수 없습니다: 여러분은 *my\_top\_block* 클래스가 이전에 인스턴스를 생성하지 않고 실행되었다는 것을 알아차렸을지 모르겠습니다. 파이썬에서, 특별히 여러분이 어떻게든 오직 하나의 인스턴스만을 얻으려는 클래스를 갖고 있다면 이것은 꽤 상식적인 행동입니다. 하지만, 여러분이 하나의 인스턴스를 생성하든 그 이상의 클래스 인스턴스를 생성하든 인스턴스에서 *run()* 메소드를 호출해야 합니다.
 
 두번째로, 들여쓰기는 코드의 한 부분이고 C++처럼 단순히 프로그래머의 편리를 위한게 아닙니다. 여러분께서 이 코드를 실행해 보고 수정해 볼 때 탭과 스페이스를 섞어쓰지 않아야 합니다. 모든 단계는 일관적으로 들여써져야 합니다.
 
@@ -134,9 +138,9 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
 
 ## <a name="Summary2"></a>Summary
 
-* 필수적인 GNU Radio 모듈들을 추가하기 위해서 _from gnuradio import_ 명령을 써야 합니다. 항상 _gr_ 모듈이 필요합니다.
-* 흐름 그래프는 _gr.top\_block_으로부터 상속받은 클래스에 포함됩니다.
-* 블록들은 _analog.sig\_source\_f()_와 같은 함수를 호출함으로써 그리고 변수에 반환값을 저장함으로써 생성됩니다.
+* 필수적인 GNU Radio 모듈들을 추가하기 위해서 *from gnuradio import* 명령을 써야 합니다. 항상 *gr* 모듈이 필요합니다.
+* 흐름 그래프는 *gr.top\_block*으로부터 상속받은 클래스에 포함됩니다.
+* 블록들은 *analog.sig\_source\_f()*와 같은 함수를 호출함으로써 그리고 변수에 반환값을 저장함으로써 생성됩니다.
 * 블록들은 흐름 그래프 클래스 내에서 _self.connect()_를 호출함으로써 연결됩니다.
 * 여러분께서 지금 기초 파이썬 코드를 작성하는데 편안함을 느끼지 못하신다면, 몇몇 파이썬 튜토리얼을 다 끝낼때까지 잠시 멈추십시오.
 
@@ -150,26 +154,56 @@ GNU Radio에는 매우 많은 라이브러리들과 모듈들이 있습니다. �
   
 모듈들은 좀 다르게 동작합니다. 다음은 가장 흔히 사용되는 모듈들입니다.
 
-  MODULENAME  |설명
-  ------------|----
-  gr          |Main GNU Radio 라이브러리. 거의 항상 이것을 포함해야 합니다.
-  analog      |아날로그 신호나 아날로그 변조와 관련된 어떤 것들
-  audio       |사운드 카드 제어(신호원들, 싱크들). 이것으로 사운드 카드에 오디오를 보내거나 받을 수 있지만, 확장 RF 프론트엔드와 협대역 리시버로서 사운드카드를 이용할 수도 있습니다.
-  blocks      |기타 블록들. 만약 어떤 카테고리에 들어가 있지 않다면 이곳에 있을겁니다.
-  channels    |시뮬레이션을 위한 채널 모델들
-  digital     |디지탈 변조와 관련된 것들
-  fec         |Forward Error Correction(FEC)와 관련된 것들
-  fft         |FFT와 관련된 것들
-  filter      |[firdes](http://gnuradio.org/doc/doxygen/classgr_1_1filter_1_1firdes.html)이나 optfir과 같은 필터 블록들과 디자인 툴들
-  plot_data   |Matplotlib로 데이터를 그래프로 그리는(plot) 기능들
-  qtgui       |QT library를 사용하여 데이터를 그래프(time, frequency, spectrogram, constellation, histogram, time raster)로 그리는(plot) 그래픽 툴
-  trellis     |trellis, [trellis coded modulation](http://en.wikipedia.org/wiki/Trellis_modulation), FSM(finite state machine)를 구축하기 위한 블록들과 도구들
-  vocoder     |음성 코딩/디코딩을 다루는 것들
-  wavelet     |wavelets을 다루는 것들
-  wxgui       |여러분의 흐름 그래프로 빠르게 GUI를 만들 수 있는 유틸리티를 포함한 서브 모듈. submodule에 모든 것을 추가하기 위해서는 _from gnuradio.wxgui import \*_ 사용하십시오. 특별한 컴포넌트들을 추가하기 위해서는 _from gnuradio.wxgui import stdgui2, fftsink2_와 같이 사용하십시오. [Graphical User Interfaces](#graphical-user-interfaces)에서 더 많은 정보를 다룹니다.
-  eng_notation|예를 들어 100 * 10^6'를 표시하기 위해 @100M'를 쓰는 것처럼 공학 표기법을 위해 기능들을 추가합니다.
-  eng_options |이 기능을 추가하기 위해 _from gnuradio.eng_options import eng_options_를 사용하십시오. 이 모듈은 공학 표기법을 이해하기 위해 파이썬 _optparse_ 모듈을 확장합니다.
-  gru         |잡다한 유틸리티들, 수학적인 것, 기타 등등
+  -------------  ------------------------------------------------------------------------------------
+  MODULE         설명
+  -------------  ------------------------------------------------------------------------------------
+  gr             Main GNU Radio 라이브러리. 거의 항상 이것을 포함해야 합니다.
+
+  analog         아날로그 신호나 아날로그 변조와 관련된 어떤 것들
+
+  audio          사운드 카드 제어(신호원들, 싱크들). 이것으로 사운드 카드에 오디오를 보내거나
+                 받을 수 있지만, 확장 RF 프론트엔드와 협대역 리시버로서 사운드카드를 이용할 수도
+                 있습니다.
+
+  blocks         기타 블록들. 만약 어떤 카테고리에 들어가 있지 않다면 이곳에 있을겁니다.
+
+  channels       시뮬레이션을 위한 채널 모델들
+
+  digital        디지탈 변조와 관련된 것들
+
+  fec            Forward Error Correction(FEC)와 관련된 것들
+
+  fft            FFT와 관련된 것들
+
+  filter         [firdes](http://gnuradio.org/doc/doxygen/classgr_1_1filter_1_1firdes.html)이나
+                 optfir과 같은 필터 블록들과 디자인 툴들
+
+  plot_data      Matplotlib로 데이터를 그래프로 그리는(plot) 기능들
+
+  qtgui          QT library를 사용하여 데이터를 그래프(time, frequency, spectrogram, constellation,
+                 histogram, time raster)로 그리는(plot) 그래픽 툴
+
+  trellis        trellis, [trellis coded modulation](http://en.wikipedia.org/wiki/Trellis_modulation)
+                 , FSM(finite state machine)를 구축하기 위한 블록들과 도구들
+
+  vocoder        음성 코딩/디코딩을 다루는 것들
+
+  wavelet        wavelets을 다루는 것들
+
+  wxgui          여러분의 흐름 그래프로 빠르게 GUI를 만들 수 있는 유틸리티를 포함한 서브 모듈.
+                 submodule에 모든 것을 추가하기 위해서는 *from gnuradio.wxgui import \** 사용하십시오
+                 . 특별한 컴포넌트들을 추가하기 위해서는 *from gnuradio.wxgui import stdgui2, fftsink2*와 같이 사용하십시오. [Graphical User Interfaces](#graphical-user-interfaces)에서 더 많은
+                 정보를 다룹니다.
+
+  eng_notation   예를 들어 100 * 10^6'를 표시하기 위해 @100M'를 쓰는 것처럼 공학 표기법을 위해 
+                 기능들을 추가합니다.
+
+  eng_options    이 기능을 추가하기 위해 _from gnuradio.eng_options import eng_options_를
+                 사용하십시오.
+                 이 모듈은 공학 표기법을 이해하기 위해 파이썬 _optparse_ 모듈을 확장합니다.
+
+  gru            잡다한 유틸리티들, 수학적인 것, 기타 등등
+  -------------  ------------------------------------------------------------------------------------
 
 이것은 아주 완벽한 리스트도 아니고 그 자체로 매우 유용한 모듈 설명도 아닙니다. GNU Radio code는 자주 변경되어서 정적인 문서를 만드는 것은 매우 현명하지 못한 일일 겁니다. GNU Radio는 동적으로 API 문서를 생성하기 위해 [Doxygen](http://gnuradio.org/doc/doxygen/index.html)과 [Sphinx](http://gnuradio.org/doc/sphinx/index.html)를 씁니다.
 
@@ -202,7 +236,7 @@ Doxygen과 Sphinx는 C++과 파이썬 API의 문서 자동화를 위해 이용�
 
 어떤 블록을 사용할지, *analog.sig\_source\_f()*에 무엇을 전달할지 어떻게 알 수 있겠습니까? 문서를 보면 됩니다. 여러분이 Sphinx에서 생성한 문서를 보신다면, "gnuradio.analog"를 클릭 하십시오. "Signal Sources"로 가십시오.
 
-    *analog.sig\_source\_f()*가 GNU Radio 3.7.4에는 없습니다. 하지만 [GNU Radio 3.7.3](http://gnuradio.org/doc/doxygen-3.7.3/classgr_1_1analog_1_1sig__source__f.html)에서 그 클래스를 확인할 수 있습니다. (steveyoon@telechips.com)
+  (역주)*analog.sig\_source\_f()*가 GNU Radio 3.7.4에는 없습니다. 하지만 [GNU Radio 3.7.3](http://gnuradio.org/doc/doxygen-3.7.3/classgr_1_1analog_1_1sig__source__f.html)에서 그 클래스를 확인할 수 있습니다. (steveyoon@telechips.com)
 
 여러분은 *sig\_source\_* 족을 포함한  신호 발생기 목록을 찾을 수 있을 겁니다. 접미사는 출력 자료형을 정의합니다.
 
@@ -218,7 +252,7 @@ Doxygen과 Sphinx는 C++과 파이썬 API의 문서 자동화를 위해 이용�
 
 이 시점에서, GNU Radio 커튼 뒤를 좀 가까이 바라보는 것이 좋은 것 같습니다. 여러분이 C++로 작성된 블록을 파이썬에서 쉽게 이용할 수 있는 이유는 GNU Radio가 [SWIG](http://www.swig.org/)이라는 툴을 파이썬과 C++ 간의 인터페이스를 생성하는데 쓰기 때문입니다. 앞에서 언급된 예제에서 *gr::analog::sig\_source\_f::make()*처럼 *gr::component::block::make(\*\*\*)*와 같이 C++에서의 모든 블록들은 생성하는 함수로부터 시작합니다. 이 함수는 항상 그것에 맞는 클래스와 같은 페이지에 문서화 되어 있습니다. 그리고 이 함수가 파이썬에 export 되었습니다.  그래서 파이썬에서 *analog.sig\_source\_f()*는 C++에서 *gr::analog::sig\_source\_f::make()*를 호출합니다. 같은 이유 때문에, 같은 argument(인수)를 갖습니다. - 그것이 여러분이 파이썬에서 블록을 초기화 하는 법을 아는 것 입니다.
 
-    파이썬 모듈은 C++로 먼저 작성된 뒤 파이썬으로 export 된 것이기 때문에 C++ API 문서인 Doxygen 문서를 보면 파이썬에서의 모듈 블록을 초기화 할 때 인자가 무엇인지 알 수 있게 된다는 말 입니다. (steveyoon@telechips.com)
+  (역주)파이썬 모듈은 C++로 먼저 작성된 뒤 파이썬으로 export 된 것이기 때문에 C++ API 문서인 Doxygen 문서를 보면 파이썬에서의 모듈 블록을 초기화 할 때 인자가 무엇인지 알 수 있게 된다는 말 입니다. (steveyoon@telechips.com)
 
 여러분이 Doxygen 문서에서 클래스 *gr::analog::sig\_source\_f*를 불러올 때, *set\_frequency()*같은 많은 다른 클래스 메소드를 보게 될 겁니다. 이 함수들은 파이썬으로도 export되었습니다. 그래서 여러분이 만약 한 신호원을 생성했었고 주파수를 변경하기를 원한다면 이 메소드를 여러분의 파이썬으로 정의된 블록에 사용할 수 있습니다.
 
@@ -359,5 +393,84 @@ Hierarchical 블록들의 예는 다음과 같습니다.
 이제, *my\_top\_block*이 시작할 때 두 흐름 그래프가 병렬로 시작됩니다. 계층 구조 블록들이 명시적으로 정의된 입출력이 없다는 것에 주목하십시오. 그 블록들은 null IO signauture를 썼습니다. 결과적으로  그것들은 쏘쓰나 싱크로서 *self*에 연결하지 않습니다. 그 블록들은 자신만의 쏘쓰와 싱크를 정의하는 것이 더 낫습니다(계층 구조 블록을 정의하고 있는 그 때, 여러분이 정의하려는 만큼의 쏘쓰와 싱크). 최상위 블록은 단순히 계층 구조 블록들을 스스로에게 연결하지만 그것들에 어떤 방법으로든 접속하지는 않습니다.
 
 다증 흐름 그래프의 예:
+
     gr-uhd/examples/python/usrp_nbfm_ptt.py
+
+## <a name="gnu-radio-extensions-tool"></a>GNU Radio extensions and tools
+
+GNU Radio는 블록들과 흐름 그래프들에 더해 많은 도구들과 여러분이 DSP 응용 프로그램을 작성하기에 도움이 되는 코드들이 딸려 있습니다.
+여러분을 돕도록 설계된 유용한 GNU Radio 응용 프로그램의 집합은 gr-util/ 안에 있습니다.
+필터 설계 코드나 변조 유틸리트 등과 같이 여러분의 파이썬 코드에서 이용할 수 있는 유틸리티를 찾기 위해 gnuradio-runtime/python/gnuradio에서 (그리고 다른 gr-<component>/python 디렉토리에서도) 소스 코드를 찾아 보십시오.
+
+## <a name="controlling-flow-graphs"></a>Controlling flow graphs
+
+여러분이 여기까지 튜토리얼을 따라왔다면 흐름 그래프는 항상 *gr.top\_block*에서 상속받은 클래스로 구현된다는 것을 알아차렸을 것 입니다. 이 클래스를 어떻게 제어하느냐는 질문이 남아있습니다.
+
+이전에 언급한것처럼, *gr.top\_block*으로부터 상속받을 클래스는 여러분이 필요로 할 모든 기능들을 가져옵니다. 
+현재의 흐름 그래프를 실행하거나 멈추기 위해, 아래의 메소드들을 사용하십시오:
+
+---------- ----------------------------------------------------------------------------------------
+*run()*    흐름 그래프를 실행하는 가장 간단한 방법입니다. *start()*를 호출한 뒤에 *wait()*를 호출
+           하십시오. 스스로 멈추거나 SIGINT를 받을 때까지 막연히 실행되어야 할 흐름그래프를 실행할 
+           때 사용되곤 합니다.
+
+*start()*  정지 상태의 흐름 그래프를 시작합니다. 스레드들이 생성되면 호출자에게 반환됩니다.
+
+*stop()*   실행 중인 흐름 그래프를 멈춥니다. 스케쥴러에 의해 생성된 스레드들이 종료되도록 알리고
+           호출자에게 반환됩니다.
+
+*wait()*   흐름 그래프가 완료되기까지 기다리게 합니다. 흐름 그래프는 (1)모든 블록이 완료되었거나 
+           (2) 종료 요청을 받아서 멈추었을 때 완료가 됩니다.
+
+*lock()*   재설정을 준비하는 동안 흐름 그래프를 잠급니다.
+
+*unlock()* 재설정을 준비하는 동안 흐름 그래프의 잠금을 풉니다. 같은 수의 *lock()*과 *unlock()*이
+           있을 때, 흐름 그래프는 자동으로 재시작할 것 입니다.
+---------- ----------------------------------------------------------------------------------------
+
+더 자세한 내용을 보려면 [gr::top\_block](http://gnuradio.org/doc/doxygen/classgr_1_1top__block.html) 문서를 찾으십시오.
+
+예제:
+
+    class my_top_block(gr.top_block):
+        def __init__(self):
+            gr.top_block.__init__(self)
+        ... # Define blocks etc. here
+
+    if __name__ == '__main__':
+        my_top_block().start()
+        sleep(5) # Wait 5 secs (assuming sleep was imported!)
+        my_top_block().stop()
+        my_top_block().wait() # If the graph is needed to run again, wait() must be called after stop
+        ... # Reconfigure the graph or modify it
+        my_top_block().start() # start it again
+        sleep(5) # Wait 5 secs (assuming sleep was imported!)
+        my_top_block().stop()  # since (assuming) the graph will not run again, no need for wait() to be called
+
+이 메소드들은 여러분이 흐름 그래프를 밖에서 제어하도록 도와줍니다. 하지만 많은 문제들 때문에 이것은 충분치 않을 것 입니다: 여러분은 단순히 흐름 그래프를 시작하거나 멈추게 하는 것 말고 행동을 재설정 하고 싶을 겁니다. 예를 들어, 여러분의 응용 프로그램이 흐름 그래프 안 어딘가에 볼륨 제어를 한다고 상상해 봅시다. 이 볼륨 제어는 샘플 스트림에 곱셈기를 삽입함으로써 구현됩니다. 이 곱셈기는 *blocks.multiply\_const\_ff* 타입입니다. 이 블록을 문서에서 찾아보면, 곱셈 인수를 셋팅하는 *blocks.multiply\_const\_ff.set\_k()*를 볼 수 있습니다. 여러분은 블록을 제어하기 위해 셋팅 값들을 밖에서 볼 수 있게 해야 합니다. 가장 간단한 방법은 블록을 흐름 그래프 클래스의 속성(attribute)으로 만드는 것 입니다.
+
+예제:
+
+    class my_top_block(gr.top_block):
+        def __init__(self):
+            gr.top_block.__init__(self)
+        ... # Define some blocks
+        self.amp = blocks.multiply_const_ff(1) # Define multiplier block
+        ... # Define more blocks
+
+            self.connect(..., self.amp, ...) # Connect all blocks
+
+        def set_volume(self, volume):
+        self.amp.set_k(volume)
+
+    if __name__ == '__main__':
+        my_top_block().start()
+        sleep(2) # Wait 2 secs (assuming sleep was imported!)
+        my_top_block.set_volume(2) # Pump up the volume (by factor 2)
+        sleep(2) # Wait 2 secs (assuming sleep was imported!)
+        my_top_block().stop()
+
+이 예제는 2 초 동안 흐름 그래프를 실행한 뒤, 멤버 함수인 *set\_volume()*을 호출함으로써 *amp* 블록에 접속하여 볼륨을 두 배로 만듭니다. 물론, 멤머 함수를 생략하고 *amp* 속성(attribute)에 직접 접근할 수도 있었습니다.
+
+힌트: 블록에 흐름 그래프의 속성(attribute)를 만드는 것은 일반적으로 추가적인 멤버 함수로 더 쉽게 흐름 그래프를 확장하는 것으로서 좋은 방법입니다.
 
