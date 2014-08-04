@@ -1,5 +1,7 @@
 % Tutorials for writing Python applications
+
 % Author: GNU Radio contributors
+
 % Translator: Yoon Kyong Lok(steveyoon@telechips.com)
 
 # <a name="Introduction"></a>Introduction
@@ -8,7 +10,7 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
 비록 이 튜토리얼이 여러분에게 GNU Radio에 대해서 가능한 쉽게 소개하려고 디자인됐지만, 완벽한 가이드는 아닐 겁니다. 사실, 저는 때때로 단순히 더 쉽게 설명하기 위해 진실을 말하지 않을 것 입니다. 저는 또 이후의 챕터들에서 스스로에게 모순된 말을 할 것 입니다. GNU Radio application들을 개발하기 위해서는 여전히 머리를 좀 쓰셔야 할 것 입니다.
 
 # <a name="Preliminaries"></a>Preliminaries
-이 튜토리얼을 시작하기 전에 GNU Radio가 설치되어 동작하는지 확인하십시오. USRP는 반드시 필요하지 않지만, 어떤 종류의 쏘쓰(입력원)과 sink (USRP, 오디오나 다른 하드웨어)가, 비록 엄격히 요구되는건 아니지만, 도움이 될 것입니다. GNU Radio 예제들(gr-audio/examples/python 안의 dial\_tone.py과 같은)이 동작한다면 시작할 준비가 되신 것 입니다.
+이 튜토리얼을 시작하기 전에 GNU Radio가 설치되어 동작하는지 확인하십시오. USRP는 반드시 필요하지 않지만, 어떤 종류의 쏘스(입력원)과 sink (USRP, 오디오나 다른 하드웨어)가, 비록 엄격히 요구되는건 아니지만, 도움이 될 것입니다. GNU Radio 예제들(gr-audio/examples/python 안의 dial\_tone.py과 같은)이 동작한다면 시작할 준비가 되신 것 입니다.
 여러분은 프로그래밍에 대한 백그라운드를 가지고 있어야 합니다. 하지만 여러분이 파이썬으로 프로그램을 해본적이 없더라도 걱정하지 마십시오. 파이썬은 배우기에 매우 쉬운 언어입니다.
 
 # <a name="Understanding-flow-graphs"></a>Understanding flow graphs
@@ -27,7 +29,7 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
     +-----+  +-----+  +----------------+
 
 첫번째로, 마이크에서 어떤 오디오 신호가 여러분 PC의 사운드 카드에 의해 녹음되고 디지털 신호로 변환됩니다. 그 샘플들은 어떤 FIR filter와 같은 것으로 구현된 low pass filter(LPF)인 다음 블록으로 스트림 됩니다. 그 필터된 신호는 필터된 오디오 신호를 파일로 저장하는 마지막 블록으로 전달됩니다.
-이 예제는 단순하지만 완전한 흐름 그래프입니다. 첫번째와 마지막 블록은 특별한 목적을 제공합니다: 그것들은 쏘쓰(입력원)과 싱크로서 운영됩니다. 모든 흐름 그래프는 적어도 하나의 기능하는 쏘쓰(입력원)과 싱크를 필요로 합니다.
+이 예제는 단순하지만 완전한 흐름 그래프입니다. 첫번째와 마지막 블록은 특별한 목적을 제공합니다: 그것들은 쏘스(입력원)과 싱크로서 운영됩니다. 모든 흐름 그래프는 적어도 하나의 기능하는 쏘스(입력원)과 싱크를 필요로 합니다.
 
 ### <a name="Dial-tone-generator"></a>Dial tone generator
 
@@ -41,7 +43,7 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
     | Sine generator (440Hz) +---+
     +------------------------+
 
-이 간단한 예제는 종종 "Hello World of GNU Radio"라고 불립니다. 첫번째 예제와 달리, 두 개의 쏘쓰(입력원)를 가지고 있습니다. 반면에 싱크는 두 개의 입력(이 경우는 사운드 카드의 왼쪽과 오른쪽 채널)을 가지고 있습니다. 이 예제의 소스코드는 gr-audio/examples/python/dial\_tone.py에 있습니다.
+이 간단한 예제는 종종 "Hello World of GNU Radio"라고 불립니다. 첫번째 예제와 달리, 두 개의 쏘스(입력원)를 가지고 있습니다. 반면에 싱크는 두 개의 입력(이 경우는 사운드 카드의 왼쪽과 오른쪽 채널)을 가지고 있습니다. 이 예제의 소스코드는 gr-audio/examples/python/dial\_tone.py에 있습니다.
 
 ### <a name="QPSK-Demodulator"></a>QPSK Demodulator
 
@@ -61,7 +63,7 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
     | Application     |                                          DATA
     +-----------------+
 
-이 예제는 조금 더 복잡합니다. 하지만 RF 엔지니어에게는 꽤 익숙할 것 입니다. 이 경우는 쏘쓰가 하나의 안테나에 연결된 USRP 입니다. 이런 종류의 쏘쓰는 복소수 샘플들을 이어지는 블록에 보냅니다.
+이 예제는 조금 더 복잡합니다. 하지만 RF 엔지니어에게는 꽤 익숙할 것 입니다. 이 경우는 쏘스가 하나의 안테나에 연결된 USRP 입니다. 이런 종류의 쏘스는 복소수 샘플들을 이어지는 블록에 보냅니다.
 
 이런 종류의 흐름 그래프에서 흥미로운 부분은 흐름 그래프 동안 데이터 형들이 변한다는 것입니다: 첫번째에서 복소수 베이스밴드 샘플들이 통과됩니다. 그러면 복소수 심볼들이 신호로부터 모여집니다. 다음에는 이 심볼들이 다음 번 처리를 위해 비트로 변환됩니다. 마지막으로 디코딩 된 비트들은 그 데이터를 이용하는 어떤 응용으로 전달됩니다.
 
@@ -74,7 +76,7 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
     | Audio Source +----------+ NBFM Modulator +---------+  USRP Sink |
     +--------------+          +----------------+         +------------+
 
-이 applicaiton은 두 개의 분리되고 서로 병렬로 동작하는 흐름 그래프들로 구성되어 있습니다. 그것들 중 하나는 Tx(송신) 경로로 다루어지고, 다른 하나는 Rx(수신) 경로로 다루어집니다. 이런 종류의 application은 하나가 동작될 때 다른 하나를 중지시키기 위해 흐름 그래프 외부에 추가적인 코드를 요구할 것 입니다. 두 흐름 그래프는 적어도 하나의 쏘쓰(입력원)와 싱크를 서로 간에 요구합니다. 여러분은 조금더 복잡하지만 gr-uhd/examples/python/usrp\_nbfm\_ptt.py에서 이것을 수행하는 GNU Radio application을 찾을 수 있습니다.
+이 applicaiton은 두 개의 분리되고 서로 병렬로 동작하는 흐름 그래프들로 구성되어 있습니다. 그것들 중 하나는 Tx(송신) 경로로 다루어지고, 다른 하나는 Rx(수신) 경로로 다루어집니다. 이런 종류의 application은 하나가 동작될 때 다른 하나를 중지시키기 위해 흐름 그래프 외부에 추가적인 코드를 요구할 것 입니다. 두 흐름 그래프는 적어도 하나의 쏘스(입력원)와 싱크를 서로 간에 요구합니다. 여러분은 조금더 복잡하지만 gr-uhd/examples/python/usrp\_nbfm\_ptt.py에서 이것을 수행하는 GNU Radio application을 찾을 수 있습니다.
 
 ## <a name="Summary1"></a>Summary
 흐름 그래프에 대한 결론을 정리합니다. 여기에 여러분이 정말로 알아야만 하는 중대한 요점을 빠르게 요약합니다.
@@ -82,7 +84,7 @@ GNU Radio 초보자 여러분 환영합니다. 이 튜토리얼을 읽으시는 
 * GNU Radio에서 모든 신호처리는 흐름 그래프로 완성됩니다.
 * 흐름 그래프는 블록들로 구성됩니다. 하나의 블록은 필터링, 신호 추가, 변환, 디코딩, 하드웨어 접근 외의 많은 동작들과 같은 신호처리 운용의 하나를 수행합니다.
 * 데이터는 블록 간에 복소수, 실수 정수, 부동소수점 수, 또는 여러분이 정의할 수 있는 기본적인 데이터형 등의 다양한 형태로 전달됩니다.
-* 모든 흐름 그래프는 적어도 하나의 싱크와 쏘쓰(입력원)를 필요로 합니다.
+* 모든 흐름 그래프는 적어도 하나의 싱크와 쏘스(입력원)를 필요로 합니다.
 
 # <a name="A-first-working-code-example"></a>A first working code example
 다음 단계는 이런 흐름 그래프들을 실제 파이썬에서 어떻게 작성할 수 있는지 아는 것 입니다. 약간의 코드를 한 줄 한 줄 분석하는 것으로 시작해 보도록 하겠습니다. 여러분이 파이썬을 잘 알고 있다면 몇몇 설명은 아마 건너뛰어도 좋을 것 입니다만, 그렇지 않다면 아직 다음 절로 달려가시면 안됩니다. 이 설명은 파이썬과 GNU Radio 초보자 모두를 위한 것 입니다.
@@ -190,7 +192,7 @@ GNU Radio에는 매우 많은 라이브러리들과 모듈들이 있습니다. �
 
   wavelet        wavelets을 다루는 것들
 
-  wxgui          여러분의 흐름 그래프로 빠르게 GUI를 만들 수 있는 유틸리티를 포함한 서브 모듈.
+  wxgui          여러분의 흐름 그래프로 빠르게 GUI를 만들 수 있는 유틸리티를 포함한 하위 모듈.
                  submodule에 모든 것을 추가하기 위해서는 *from gnuradio.wxgui import \** 사용하십시오
                  . 특별한 컴포넌트들을 추가하기 위해서는 *from gnuradio.wxgui import stdgui2, fftsink2*와 같이 사용하십시오. [Graphical User Interfaces](#graphical-user-interfaces)에서 더 많은
                  정보를 다룹니다.
@@ -198,16 +200,16 @@ GNU Radio에는 매우 많은 라이브러리들과 모듈들이 있습니다. �
   eng_notation   예를 들어 100 * 10^6'를 표시하기 위해 @100M'를 쓰는 것처럼 공학 표기법을 위해 
                  기능들을 추가합니다.
 
-  eng_options    이 기능을 추가하기 위해 _from gnuradio.eng_options import eng_options_를
+  eng_options    이 기능을 추가하기 위해 *from gnuradio.eng\_options import eng\_options*를
                  사용하십시오.
-                 이 모듈은 공학 표기법을 이해하기 위해 파이썬 _optparse_ 모듈을 확장합니다.
+                 이 모듈은 공학 표기법을 이해하기 위해 파이썬 *optparse* 모듈을 확장합니다.
 
   gru            잡다한 유틸리티들, 수학적인 것, 기타 등등
   -------------  ------------------------------------------------------------------------------------
 
 이것은 아주 완벽한 리스트도 아니고 그 자체로 매우 유용한 모듈 설명도 아닙니다. GNU Radio code는 자주 변경되어서 정적인 문서를 만드는 것은 매우 현명하지 못한 일일 겁니다. GNU Radio는 동적으로 API 문서를 생성하기 위해 [Doxygen](http://gnuradio.org/doc/doxygen/index.html)과 [Sphinx](http://gnuradio.org/doc/sphinx/index.html)를 씁니다.
 
-대신에, 여러분은 모듈들의 세세한 것을 더 탐구하기 위해 오래된 스타워즈의 모토를 따르실 수 있습니다. "쏘쓰를 이용하라!" GNU Radio에 여러분이 원하는 기능이 이미 있다고 여기신다면 파이썬을 사용할 모듈 디렉토리를 훑어보시거나 GNU Radio의 쏘스 디렉토리를 찾아보십시오. 특별히 쏘스 디렉토리에서 gr-trellis와 같이 _gr-_로 시작하는 디렉토리들에 주의를 기울이십시오. 이것들은 그 자신의 코드와 결과적으로 그 자신의 모듈들을 갖고 있습니다. 
+대신에, 여러분은 모듈들의 세세한 것을 더 탐구하기 위해 오래된 스타워즈의 모토를 따르실 수 있습니다. "쏘스를 이용하라!" GNU Radio에 여러분이 원하는 기능이 이미 있다고 여기신다면 파이썬을 사용할 모듈 디렉토리를 훑어보시거나 GNU Radio의 쏘스 디렉토리를 찾아보십시오. 특별히 쏘스 디렉토리에서 gr-trellis와 같이 _gr-_로 시작하는 디렉토리들에 주의를 기울이십시오. 이것들은 그 자신의 코드와 결과적으로 그 자신의 모듈들을 갖고 있습니다. 
 
 물론 파이썬 스스로도 GNU Radio application을 만들기 위해 몇몇은 필요없을지라도 엄청나게 유용한 많은 모듈들을 갖고 있습니다. 더 많은 정보를 확인하기 위해 파이썬 문서와 [SciPy 웹사이트](http://www.scipy.org/)를 찾아보십시오.
 
@@ -228,7 +230,7 @@ Doxygen과 Sphinx는 C++과 파이썬 API의 문서 자동화를 위해 이용�
 첫번째로, *analog* 모듈의 *sig_source_f* 함수가 실행됩니다. 이 함수는 4개의 인자를 받습니다.
 
 * 파이썬 변수, sample_rate
-* *analog*모듈에서 정의되어 있는([여기](http://gnuradio.org/doc/doxygen/group__waveform__generators__blk.html#gac97c0f42ffb63f1265decceaaeab9177)) 상수, analog.GR_SIN_WAVE
+* *analog* 모듈에서 정의되어 있는([여기](http://gnuradio.org/doc/doxygen/group__waveform__generators__blk.html#gac97c0f42ffb63f1265decceaaeab9177)) 상수, analog.GR_SIN_WAVE
 * sample rate에 비례하는 sine wave의 주파수인 보통의 문자열, 상수 350
 * sine wave의 진폭으로 설정할 변수, ampl
 
@@ -276,7 +278,7 @@ Doxygen과 Sphinx는 C++과 파이썬 API의 문서 자동화를 위해 이용�
 
 * GNU Radio는 입력과 출력의 데이터형이 짝을 이루는지 그 크기를 체크해서 확인합니다. 만약 여러분이 같은 크기이지만 서로 다른 데이터형의 포트들을 연결하려 한다면, 여러분은 분명히 쓰레기 데이터를 얻게 될 것 입니다.
 * 싱글 비트들을 처리할 때에는 주의를 하십시오. 어떤 경우에는, 보통의 감각으로 바이너리 데이터로 작업해야 할 것 입니다. 어떤 시점의 특정 개수의 비트들을 다루고 싶어지는 경우도 생깁니다. 이것을 위해 *packed_to_unpacked\**와 *unpacked\_to\_packed\** 블록을 보십시오.
-* 동적 범위를 다룰 때는 주의를 기울이십시오. 부동소수점형이나 복소수형을 사용할 때, 고려하는 기계에서 필요로 하는 것보다 더 큰 범위를 가집니다. 그러나 어떤 싱크와 쏘쓰들은 여러분이 고정되길 필요로 하는 특별한 범위를 갖기도 합니다. 예를 들어, 오디오 싱크들은 +-1 사이의 샘플들을 필요로 하고 이 범위를 벗어나면 잘려집니다. 반면에 USRP 싱크는 DAC의 동적 범위 때문에 -32768부터 32767까지의 범위를 갖습니다.
+* 동적 범위를 다룰 때는 주의를 기울이십시오. 부동소수점형이나 복소수형을 사용할 때, 고려하는 기계에서 필요로 하는 것보다 더 큰 범위를 가집니다. 그러나 어떤 싱크와 쏘스들은 여러분이 고정되길 필요로 하는 특별한 범위를 갖기도 합니다. 예를 들어, 오디오 싱크들은 +-1 사이의 샘플들을 필요로 하고 이 범위를 벗어나면 잘려집니다. 반면에 USRP 싱크는 DAC의 동적 범위 때문에 -32768부터 32767까지의 범위를 갖습니다.
 
 ## <a name="hierarchical-bloks"></a>Hierarchical blocks
 때때로 몇몇 블록을 하나의 블록으로 합치기도 합니다. 여러분이 모두 몇 개의 블록으로 구성된 공통 신호처리 컴포넌트를 가진 몇 개의 응용프로그램을 가졌다고 말해봅시다. 이 블록들은 보통의 GNU Radio 블록이라면 여러분의 응용프로그램에서 사용될 수 있는 새로운 블록으로 결합될 수 있습니다.
@@ -290,7 +292,7 @@ Doxygen과 Sphinx는 C++과 파이썬 API의 문서 자동화를 위해 이용�
       |     HierBlock     |
       +-------------------+
 
-이것이 여러분이 할 것입니다. *gr.hier\_block2*로부터 상속받은 흐름 그래프를 만들고, 쏘쓰와 싱크로서 *self*를 이용합니다.
+이것이 여러분이 할 것입니다. *gr.hier\_block2*로부터 상속받은 흐름 그래프를 만들고, 쏘스와 싱크로서 *self*를 이용합니다.
 
     class HierBlock(gr.hier_block2):
         def __init__(self, audio_rate, if_rate):
@@ -304,7 +306,7 @@ Doxygen과 Sphinx는 C++과 파이썬 API의 문서 자동화를 위해 이용�
             self.connect(self, B1, B2, self)
 
 보시다시피, 계층 구조의 블록을 만드는 것은 *gr.top\_block*으로 흐름 그래프를 만드는 것과 매우 비슷합니다. 
-쏘쓰와 싱크로서 *self*를 이용하는 것과 별개로, 또 다른 차이가 있습니다. (세번째 줄에서 호출되는) 부모 클래스의 생성자가 추가적인 정보를 받도록 합니다. *gr.hier\_block2.\_\_init\_\_()* 호출에 4개의 파라미터가 필요합니다.
+쏘스와 싱크로서 *self*를 이용하는 것과 별개로, 또 다른 차이가 있습니다. (세번째 줄에서 호출되는) 부모 클래스의 생성자가 추가적인 정보를 받도록 합니다. *gr.hier\_block2.\_\_init\_\_()* 호출에 4개의 파라미터가 필요합니다.
 * self (항상 첫번째 인수로 생성자를 전달합니다.)
 * 계층 구조 블록을 위한 식별자로서 문자열 (편리한대로 바꾸십시오)
 * 입력 서명
@@ -321,7 +323,7 @@ Doxygen과 Sphinx는 C++과 파이썬 API의 문서 자동화를 위해 이용�
 * gr_sizeof_char
 입니다.
 
-특별히 쏘쓰와 싱크로서 계층 구조 블록을 정의하는 것으로서, null IO 서명을 생성하기 위해 gr.io\_signature(0,0,0)을 이용합니다. 
+특별히 쏘스와 싱크로서 계층 구조 블록을 정의하는 것으로서, null IO 서명을 생성하기 위해 gr.io\_signature(0,0,0)을 이용합니다. 
 
 그것이 다 입니다. 이제 여러분은 보통 블록을 사용하여 *HierBlock* 쓸 수 있습니다. 예를 들면, 같은 파일에서 이 코드를 넣을 수 있습니다.
 
@@ -390,7 +392,7 @@ Hierarchical 블록들의 예는 다음과 같습니다.
         self.connect(tx_path)
         self.connect(rx_path)
 
-이제, *my\_top\_block*이 시작할 때 두 흐름 그래프가 병렬로 시작됩니다. 계층 구조 블록들이 명시적으로 정의된 입출력이 없다는 것에 주목하십시오. 그 블록들은 null IO signauture를 썼습니다. 결과적으로  그것들은 쏘쓰나 싱크로서 *self*에 연결하지 않습니다. 그 블록들은 자신만의 쏘쓰와 싱크를 정의하는 것이 더 낫습니다(계층 구조 블록을 정의하고 있는 그 때, 여러분이 정의하려는 만큼의 쏘쓰와 싱크). 최상위 블록은 단순히 계층 구조 블록들을 스스로에게 연결하지만 그것들에 어떤 방법으로든 접속하지는 않습니다.
+이제, *my\_top\_block*이 시작할 때 두 흐름 그래프가 병렬로 시작됩니다. 계층 구조 블록들이 명시적으로 정의된 입출력이 없다는 것에 주목하십시오. 그 블록들은 null IO signauture를 썼습니다. 결과적으로  그것들은 쏘스나 싱크로서 *self*에 연결하지 않습니다. 그 블록들은 자신만의 쏘스와 싱크를 정의하는 것이 더 낫습니다(계층 구조 블록을 정의하고 있는 그 때, 여러분이 정의하려는 만큼의 쏘스와 싱크). 최상위 블록은 단순히 계층 구조 블록들을 스스로에게 연결하지만 그것들에 어떤 방법으로든 접속하지는 않습니다.
 
 다증 흐름 그래프의 예:
 
@@ -483,3 +485,145 @@ GNU Radio는 블록들과 흐름 그래프들에 더해 많은 도구들과 여�
 어떤면에서, GNU Radio는 파이썬을 강력하고 실시간 가능한 DSP 라이브러리로 확장합니다. 이것과 다른 라이브러리들을 결합함으로써 굉장한 기능을 여러분의 손 끝 바로 거기에 둘 수 있습니다. 예를 들어, GNU Radio와 파이썬 과학계산 라이브러리 모음인 SciPy를 결합함으로써, 여러분은 하나의 응용 프로그램에서 실시간으로 RF 신호를 녹취할 수 있고 오프라인으로 확장된 수학 연산을 할 수 있고 통계값을 데이터베이스에 저장할 수 있는 등의 일을 할 수 있습니다. 여러분이 이런 모든 라이브러리들을 결합한다면 Matlab 같은 비싼 공학용 소프트웨어 조차도 쓸 필요가 없게 될 것 입니다.
 
 [http://www.scipy.org](http://www.scipy.org)
+
+# <a name="advanced-topics"></a>Advanced Topics
+
+이전 섹션들을 읽으셨다면, 이미 첫번째 파이썬 GNU Radio 응용 프로그램을 작성할만큼 충분히 알게 되셨을 겁니다. 이 섹션은 파이썬 GNU Radio 응용 프로그램을 위한 고급 기능들을 조금 가볍게 이야기 하려고 합니다.
+
+## <a name="dynamic-flow-graph-creation"></a>Dynamic flow graph creation
+
+대부분의 경우에, 흐름 그래프를 정의하기 위해 앞서 이야기 한 방법은 전적으로 충분합니다. 만약에 응용 프로그램을 더 유연하게 만들려고 한다면, 클래스 밖에서 흐름 그래프를 한층 더 관리하고 싶어질 것 입니다. 이것은 코드를 *\_\_init\_\_()* 함수 밖으로 가져오고 간단히 *gr.top\_block*을 컨테이너로서 이용하는 것으로써 할 수 있습니다.
+
+예:
+    ... # We are inside some application
+    tb = gr.top_block() # Define the container
+
+    block1 = blocks.some_other_block()
+    block2 = blocks.yet_another_block()
+
+    tb.connect(block1, block2)
+
+    ... # The application does some wonderful things here
+
+    tb.start() # Start the flow graph
+
+    ... # Do some more incredible and fascinating stuff here
+
+여러분이 흐름그래프를 (재설정하거나 재시작하는 등) 동적으로 멈추는 어떤 응용 프로그램을 작성하고 있다면 이것이 좀더 실용적인 방법일 것입니다.
+
+이런 종류의 흐름 그래프 셋업의 예제:
+
+ gr-uhd/apps/hf_explorer/hfx.py
+
+## <a name="command-line-options"></a>Command Line Options
+
+파이썬에 명령줄 옵션을 파싱하는 라이브러리가 있습니다. 어떻게 사용할지에 대해서 *optparse* 모듈 문서를 찾아 보십시오. 
+
+GNU Radio는 새 명령줄 옵션 자료형으로 optparse를 확장합니다. 이 확장을 추가하기 위해 *from gnuradio.eng\_option import eng_option* 사용하십시오. eng\_option에서 아래의 자료형을 쓸 수 있습니다.
+
+----------- -----------------------------------------------------------------------------------------
+eng\_float  원래의 부동소수점 옵션과 비슷하지만 101.8M 같은 공학적 표시법도 허용합니다.
+
+subdev      USRP에 도터보트를 명세하기 위해 A:0 처럼 오직 가용한 부장치(subdevice) 설명자들만
+            허용합니다.
+
+intx        오직 정수만 허용합니다.
+----------- -----------------------------------------------------------------------------------------
+
+여러분의 응용 프로그램이 명령줄 옵션들을 제공한다면, 명령줄 옵션으로 GNU Radio 관습을 따르는 것이 더 훌륭할 것 같습니다. (개발자들을 위한 힌트로) 이것들을 README.hancking에서 찾아볼 수 있습니다.
+
+거의 모든 GNU Radio 예제가 이 기능을 사용합니다. 쉬운 예제로 dial\_tone.py를 보십시오.
+
+## <a name="graphical-user-interfaces"></a>Graphical User Interfaces
+
+여러분이 파이썬 전문가이고 (무슨 GUI 툴킷을 즐겨 사용하건 간에) 파이썬 GUI를 작성해본 경험이 있다면, 이 섹션을 볼 필요가 없습니다. 이전에 이야기 한 것처럼, GNU Radio는 단지 파이썬에 DSP 루틴들을 확장한 것 입니다. 그냥 GUI 응용 프로그램을 작성하십시오. 그리고 GNU Radio 흐름 그래프를 추가하고 GNU Radio 정보를 여러분의 응용 프로그램에 가져올 인터페이스들을 정의하십시오. 아니면 반대로 하셔도 됩니다.
+여러분의 데이터를 그래프로 그리고 싶으시다면 Matplotlib이나 Qwt를 사용하실 수 있습니다.
+
+그러나 때때로 여러분은 성가신 widget을 설정하거나 메뉴를 정의하는 등의 일 없이 단순히 빠르게 GUI 응용 프로그램을 작성하고 싶을 때도 있을 것 입니다. GNU Radio에는 여러분이 그래픽으로 된 GNU Radio 응용 프로그램을 작성하는데 도움이 되는 미리 정의된 클래스들이 딸려 있습니다.
+
+이 모듈들은 플랫폼 독립적인 GUI 툴킷인 wxWidgets(정확히 말해 wxPython) 기반입니다. wxPython에 대한 백그라운드가 필요합니다만 걱정하지 마십시오. 별로 복잡하지도 않고 인터넷에 몇몇 튜토리얼이 있습니다. [wxPython 웹사이트](http://www.wxpython.org)에서 문서를 찾아 보십시오.
+
+GNU Radio wxWidget 도구를 사용하기 위해 몇개의 모듈들을 추가해야 합니다.
+
+  from gnuradio.wxgui import stdgui2, fftsink2, slider, form
+
+이 네 개의 컴포넌트들은 gnuradio.wxgui 하위 모듈로부터 추가됩니다. 여기에 모듈들의 빠른 목록이 있습니다. (다시 말하지만, 결코 완전하지 않습니다. 여러분은 gr-wxgui/python에서 모듈이나 소스를 찾아보아야만 합니다.)
+
+---------------- ------------------------------------------------------------------------------------
+stdgui2          기본 GUI 도구, 항상 써야 합니다.
+
+fftsink2         스펙트럼 분석기나 다른 것을 만들기 위해 데이터의 FFT 그래프를 그립니다.
+
+scopesink2       오실로스코프 출력
+
+waterfallsink2   폭포수 출력
+
+numbersink2      입력 데이터의 숫자값 출력
+
+form             종종 입력 폼으로 사용됩니다. (아래를 보십시오)
+---------------- ------------------------------------------------------------------------------------
+
+다음으로, 새로운 흐름 그래프를 정의하겠습니다. 지금은, *gr.top\_block*이 아니라 *stdgui2.std\_top\_block*을 상속받겠습니다.
+
+    class my_gui_flow_graph(stdgui2.std_top_block):
+            def __init__(self, frame, panel, vbox, argv):
+                    stdgui2.std_top_block.__init__ (self, frame, panel, vbox, argv)
+
+보시는 바대로, 또 다른 차이가 있습니다. 생성자는 몇 개의 새로운 인자들을 받습니다. 이것은 *stdgui2.std\_top\_block*이 (gr.top\_block*만을 상속받을 때처럼) 흐름 그래프를 추가할 뿐 아니라 직접 메뉴와 같은 다소 기본적인 컴포넌트로 윈도우를 생성하기 때문입니다. 이것은 빨리 GUI 응용 프로그램을 개발하려는 사람들에게 좋은 소식입니다. GNU Radio는 윈도우와 widget에 추가하려는 모든 것을 생성합니다.  이 새로운 객체로 여러분이 할 수 있는 것들의 목록이 아래에 있습니다. (만약에 여러분에게 GUI 프로그래밍에 대한 생각이 없다면 아마도 아무 의미 없을지도 모릅니다.)
+
+------------ ----------------------------------------------------------------------------------------
+frame        윈도우의 wx.Frame입니다. frame.GetMenuBar()로 미리 정의된 메뉴를 얻을 수 있습니다.
+
+panel        모든 wxControl widget을 고정하는 'frame'에 위치된 panel
+
+vbox         panel에 배치되곤 하는 widget으로 수직 box sizer. (wx.BoxSizer(wx.VERTICAL)이 정의하는
+             법입니다)
+
+argv         명령줄 인수
+------------ ----------------------------------------------------------------------------------------
+
+이제 여러분은 GUI 응응 프로그램을 작성하기 위한 모든 것을 갖췄습니다. 단순히 vbox에 새 box sizer와  widget을 추가하고 메뉴를 변경하거나 다른 무엇이든 할 수 있습니다. 어떤 일반적인 기능들은 GNU Radio GUI 라이브러리 *form*에서 더욱 단순화 되었습니다.
+
+form은 대단히 많은 입력 widget을 갖고 있습니다: 정적 텍스트 필드(표시 전용)를 위해 *from.static\_text\_field()*, 부동소수점 값 입력을 위해 *form.float\_field()*, 텍스트 입력을 위해 *form.text\_field()*, 체크 박스를 위해 *form.checkbox\_field()*, 라디오 박스를 위해 *form.radiobox\_field()* 등. 완전한 목록을 위해 gr-wxgui/python/form.py의 소스 코드를 찾아 보십시오. 대부분의 이 호출들은 대부분의 인자를 알맞는 wxPython 객체로 전달합니다. 그래서 그 함수의 인자들은 꽤 스스로 설명하도록 되어 있습니다. form을 사용하여 widget을 추가하는 법을 아래에서 이야기 하는 예제들 중 하나에서 보겠습니다.
+
+아마도 *gnuradio.wxgui*의 가장 유용한 부분은 입력 데이터를 직접 그래프로 그릴 가능성입니다. 이것을 위해, *gnuradio.wxgui*에 딸려 있는 싱크들 중 하나가 필요합니다. 이 싱크들은 단지 다른 GNU Radio 싱크들처럼 동작합니다. 하지만 또한 wxPython에서 사용하기 위해 요구되는 속성들을 갖고 있습니다.
+
+예제:
+
+    from gnuradio.wxgui import stdgui2, fftsink2
+
+    # App gets defined here ...
+
+    # FFT display (pseudo-spectrum analyzer)
+    my_fft = fftsink2.fft_sink_f(panel, title="FFT of some Signal", fft_size=512,
+                 sample_rate=sample_rate, ref_level=0, y_per_div=20)
+    self.connect(source_block, my_fft)
+    vbox.Add(my_fft.win, 1, wx.EXPAND)
+
+처음에, 블록이 정의됩니다 (*fftsink2.fft\_sink\_f*). sampling rate와 같은 일반적인 DSP 인자들은 제쳐놓고, 생성자에 전달되는 *panel* 객체도 필요로 합니다. 다음으로, 블록은 쏘스에 연결됩니다. 마침내, FFT 윈도(my\_fft.win)가 실제로 표시되면서 *vbox* BoxSizer 내에 위치됩니다. 신호 블록 출력이 다른 많은 입력들에 연결될 수 있다는 것을 기억하십시오.
+
+마지막으로, 전부가 시작되어야 합니다. GUI를 실행할 *wx.App()*가 실행되길 원하므로 시동 코드는 보통의 흐름 그래프와는 약간 다릅니다.
+
+    if __name__ == '__main__':
+        app = stdgui2.stdapp(my_gui_flow_graph, "GUI GNU Radio Application")
+        app.MainLoop()
+
+*stdgui2.stdapp()*는 *wx.App*를 *my\_gui\_flow\_graph*(첫번째 인자)로 만듭니다. 윈도 제목은 "GUI GNU Radio Application"으로 설정하였습니다.
+
+간단한 GNU Radio GUI 들의 예제입니다.
+
+  gr-uhd/apps/uhd_fft
+  gr-audio/examples/python/audio_fft.py
+  ./gr-uhd/examples/python/usrp_am_mw_rcv.py
+
+그리고 많이 더 있습니다.
+
+# <a name="what-next"></a>What next?
+
+![이제 그만 하산하도록 하십시오](http://2.bp.blogspot.com/-Gw3kTTNVTio/UUBRgAiOdiI/AAAAAAAABvE/Xt7hrLYPa1s/s1600/yoda.bmp)
+
+파이썬으로 GNU Radio 응용 프로그램을 작성하는데 질문이 더 생긴다면, 이용할 리쏘스들이 여전히 많이 있습니다.
+
+
+* 소스 코드를 이용하십시오. 특별히 gr-<component>/examples와 gr-utils에 있는 예제는 매우 도움이 될 것 입니다.
+* [메일링 리스트](http://gnuradio.org/redmine/projects/gnuradio/wiki/MailingLists) 저장소를 확인하십시오. 여러분의 매우 수준 높은 문제들이 이전에 질문되었을 수 있습니다.
