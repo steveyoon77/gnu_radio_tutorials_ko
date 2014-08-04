@@ -1,7 +1,5 @@
 % Tutorials for writing Python applications
-
 % Author: GNU Radio contributors
-
 % Translator: Yoon Kyong Lok(steveyoon@telechips.com)
 
 # <a name="Introduction"></a>Introduction
