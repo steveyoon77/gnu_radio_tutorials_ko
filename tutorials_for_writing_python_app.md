@@ -618,7 +618,7 @@ form은 대단히 많은 입력 widget을 갖고 있습니다: 정적 텍스트 
 
 # <a name="what-next"></a>What next?
 
-![이제 그만 하산하도록 하십시오](http://2.bp.blogspot.com/-Gw3kTTNVTio/UUBRgAiOdiI/AAAAAAAABvE/Xt7hrLYPa1s/s1600/yoda.bmp)
+![이제 그만 하산하도록 하십시오](http://2.bp.blogspot.com/-Gw3kTTNVTio/UUBRgAiOdiI/AAAAAAAABvE/Xt7hrLYPa1s/s1600/yoda.bmp)\
 
 파이썬으로 GNU Radio 응용 프로그램을 작성하는데 질문이 더 생긴다면, 이용할 리쏘스들이 여전히 많이 있습니다.
 
