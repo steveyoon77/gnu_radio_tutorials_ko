@@ -118,3 +118,5 @@ wxPython은 [여기](http://wxpython.org/download.php#msw)에서 다운 받을 �
 
     PS C:\Python27\Tools> python -m pip install numpy
 
+이렇게 pip로 설치할 경우 시간이 오래 걸릴 수도 있습니다. 그것이 싫은 사람은 [numpy](http://sourceforge.net/projects/numpy/files/NumPy)를 아래 사이트에서 받아서 설치 할 수도 있습니다. windows version은 바로 python에 lib 폴더로 들어가도록 되어 있습니다.
+
