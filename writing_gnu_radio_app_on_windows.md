@@ -8,7 +8,7 @@ PyQt를 이용한 GNU Radio GUI 응용 프로그램을 개발하기 위해서 �
 
 ## <a name="installing-python27"></a>Installing Python 2.7
 
-파이썬은 [여기](https://www.python.org/downloads/)에서 미리 빌드된 바이너리를 다운 받아서 설치할 수 있습니다. 파이썬 2.7.x 버전과 3.x 버전이 있는데, 우리는 편의를 위해 파이썬 2.7.x 버전을 사용하겠습니다. 
+파이썬은 [여기](https://www.python.org/downloads/)에서 미리 빌드된 바이너리를 다운 받아서 설치할 수 있습니다. 파이썬 2.7.x 버전과 3.x 버전이 있는데, 우리는 편의를 위해 파이썬 2.7.x 버전을 사용하겠습니다. **파이썬 설치 후 시스템 환경 변수의 Path에 C\:\\Python27\\을 추가하고 PYTHONPATH라는 변수 이름으로 C\:\\Python27\\Lib를 등록합니다.**
 
 ## <a name="installing-wxpython"></a>Installing wxPython
 
