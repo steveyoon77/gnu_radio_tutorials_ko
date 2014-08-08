@@ -25,6 +25,42 @@ wxPython은 [여기](http://wxpython.org/download.php#msw)에서 다운 받을 �
 우리가 사용할 디바이스는 RTL이므로 RTL-SDR 소프트웨어도 설치합니다. [여기](http://sdr.osmocom.org/trac/attachment/wiki/rtl-sdr/RelWithDebInfo.zip)에서 미리 빌드된 바이너리를 다운받을 수 있습니다.
 다운로드 받은 파일의 압축을 C\:\\rtl-sdr-release에 풉니다. 
 
+압축을 푼 뒤, 시스템 환경 변수에 32비트 시스템이면 C\:\\rtl-sdr-release\\x32를, 64비트 시스템이면 C\:\\rtl-sdr-release\\x64를 Path에 추가합니다.
+
 ## <a name="installing-rtl-sdr-py-wrapper">Installing RTL SDR Python wrapper
 
 파이썬에서 RTL-SDR을 호출할 것이기 때문에 앞서 설치한 RTL-SDR 라이브러리의 파이썬 wrapper가 필요합니다. [여기](https://github.com/roger-/pyrtlsdr)에서 다운받을 수 있습니다.
+
+설치는 github에서 소스를 다운 받은 뒤, 아래와 같이 설치할 수 있습니다.
+
+    > python setup.py install
+	running install
+	running build
+	running build_py
+	creating build
+	creating build\lib
+	creating build\lib\rtlsdr
+	copying rtlsdr\helpers.py -> build\lib\rtlsdr
+	copying rtlsdr\librtlsdr.py -> build\lib\rtlsdr
+	copying rtlsdr\rtlsdr.py -> build\lib\rtlsdr
+	copying rtlsdr\__init__.py -> build\lib\rtlsdr
+	running install_lib
+	creating C:\Python27\Lib\site-packages\rtlsdr
+	copying build\lib\rtlsdr\helpers.py -> C:\Python27\Lib\site-packages\rtlsdr
+	copying build\lib\rtlsdr\librtlsdr.py -> C:\Python27\Lib\site-packages\rtlsdr
+	copying build\lib\rtlsdr\rtlsdr.py -> C:\Python27\Lib\site-packages\rtlsdr
+	copying build\lib\rtlsdr\__init__.py -> C:\Python27\Lib\site-packages\rtlsdr
+	byte-compiling C:\Python27\Lib\site-packages\rtlsdr\helpers.py to helpers.pyc
+	byte-compiling C:\Python27\Lib\site-packages\rtlsdr\librtlsdr.py to librtlsdr.pyc
+	byte-compiling C:\Python27\Lib\site-packages\rtlsdr\rtlsdr.py to rtlsdr.pyc
+	byte-compiling C:\Python27\Lib\site-packages\rtlsdr\__init__.py to __init__.pyc
+	running install_egg_info
+	Writing C:\Python27\Lib\site-packages\pyrtlsdr-0.1.1-py2.7.egg-info
+
+설치가 완료되면 시스템 환경 변수의 Path에 C\:\\Python27\\Lib\\site-packages\\rtlsdr를 추가해 줍니다.
+
+[msvcr100.dll](http://ksrin.tistory.com/attachment/cfile25.uf@1555A348505DE9A82A51AB.dll) 또는 [msvcp100.dll](http://ksrin.tistory.com/attachment/cfile22.uf@206C5248505DE9AB0F3148.dll)이 없어서 오류가 발생할 수 있습니다. 그러면 이 파일들을 C\:\\Windows\\system32에 넣으시면 됩니다.
+
+## <a name="installing-matplotlib"></a>Installing matplotlib
+각종 그래프를 그리기 위해 [matplotlib](http://matplotlib.org/downloads.html)를 설치합니다. 링크로 연결된 곳에 가서 python 2.7.x.x에 해당하는 matplotlib를 다운받아 설치합니다.
+
