@@ -64,3 +64,8 @@ wxPython은 [여기](http://wxpython.org/download.php#msw)에서 다운 받을 �
 ## <a name="installing-matplotlib"></a>Installing matplotlib
 각종 그래프를 그리기 위해 [matplotlib](http://matplotlib.org/downloads.html)를 설치합니다. 링크로 연결된 곳에 가서 python 2.7.x.x에 해당하는 matplotlib를 다운받아 설치합니다.
 
+
+
+
+## numpy[[http://sourceforge.net/projects/numpy/files/NumPy]를 아래 사이트에서 받아서 설치 합니다. windows version은 바로 python에 lib 폴더로 들어가도록 되어 있습니다.
+
