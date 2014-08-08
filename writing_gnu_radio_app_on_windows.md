@@ -64,3 +64,57 @@ wxPython은 [여기](http://wxpython.org/download.php#msw)에서 다운 받을 �
 ## <a name="installing-matplotlib"></a>Installing matplotlib
 각종 그래프를 그리기 위해 [matplotlib](http://matplotlib.org/downloads.html)를 설치합니다. 링크로 연결된 곳에 가서 python 2.7.x.x에 해당하는 matplotlib를 다운받아 설치합니다.
 
+## <a name="installing-pip"></a>Installing pip
+파이썬 모듈 설치를 위해 제공되는 툴입니다. 
+
+먼저 [get-pip.py](https://bootstrap.pypa.io/get-pip.py)를 다운받습니다. 저는 C\:\\Python27에 다운받았습니다.
+
+	PS C:\Python27> python get-pip.py
+	Downloading/unpacking pip
+	Downloading/unpacking setuptools
+	Installing collected packages: pip, setuptools
+	Successfully installed pip setuptools
+	Cleaning up...
+
+다운로드 한 뒤에는 위와 같이 get-pip.py를 python 명령으로 실행하여 설치할 수 있습니다.
+
+이제 pip를 이용하여 파이썬 모듈을 설치 할 수 있습니다.
+
+### <a name="installing-dateutil-module"></a> Installing dateutil module
+
+파이썬 모듈 중 하나인 dateutil을 설치합니다.
+
+	PS C:\Python27> python -m pip install python-dateutil
+	Downloading/unpacking python-dateutil
+	  Running setup.py (path:c:\users\b10013~1.myt\appdata\local\temp\pip_build_b100
+	133\python-dateutil\setup.py) egg_info for package python-dateutil
+
+	Downloading/unpacking six (from python-dateutil)
+	  Downloading six-1.7.3-py2.py3-none-any.whl
+	Installing collected packages: python-dateutil, six
+	  Running setup.py install for python-dateutil
+
+	Successfully installed python-dateutil six
+	Cleaning up...
+
+### <a name="installing-pyparsing-module"></a>Installing pyparsing module
+
+파이썬 모듈 중 하나인 pyparsing을 설치합니다.
+
+	PS C:\Python27\Tools> python -m pip install pyparsing
+	Downloading/unpacking pyparsing
+	  Running setup.py (path:c:\users\b10013~1.myt\appdata\local\temp\pip_build_b100133\pyparsing\setup.py) egg_info for pac
+	kage pyparsing
+
+	Installing collected packages: pyparsing
+	  Running setup.py install for pyparsing
+
+	Successfully installed pyparsing
+	Cleaning up...
+
+### <a name="installing-numpy-module"></a>Installing numpy module
+
+파이썬 모듈 중 하나인 numpy를 설치합니다.
+
+    PS C:\Python27\Tools> python -m pip install numpy
+
