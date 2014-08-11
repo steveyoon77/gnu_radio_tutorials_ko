@@ -18,7 +18,7 @@ wxPython은 [여기](http://wxpython.org/download.php#msw)에서 다운 받을 �
 
 파이썬과 wxPython가 모두 설치되었으면 다음은 GNU Radio를 설치합니다. 이것으로 wxPython를 import 할 모듈이 설치됩니다. 윈도를 위해 미리 빌드된 바이너리는 [여기](http://files.ettus.com/binaries/gnuradio/)에서 다운 받을 수 있습니다. **latest_stable** 디렉토리에서 **gnuradio\_x.x.x.x\_Win32.exe**파일을 다운로드 받으시면 됩니다.
 
-다운받은 파일을 실행시키면 라이선스 확인을 한 뒤, 시스템 패쓰 설정을 합니다. 시스템의 모든 사용자를 위해 패쓰를 추가한다~Add GNU Radio to the system PATH for all users~고 체크 한 뒤 다음으로 진행하겠습니다. 설치 폴터를 정하고 \(저는 C:\\gnuradio로 하겠습니다.\)
+다운받은 파일을 실행시키면 라이선스 확인을 한 뒤, 시스템 패쓰 설정을 합니다. 시스템의 모든 사용자를 위해 패쓰를 추가한다~Add GNU Radio to the system PATH for all users~고 체크 한 뒤 다음으로 진행하겠습니다. 설치 폴터를 정하고 \(저는 C:\\gnuradio로 하겠습니다.\) 설치합니다. 설치가 완료되면 C\:\\gnuradio\\lib\\site-packages 디렉토리 안의 모든 디렉토리를 C\:\\Python27\\Lib\\site-packages에 복사합니다.
 
 ## <a name="installing-rtl-sdr"></a>Installing RTL SDR
 
@@ -120,3 +120,6 @@ wxPython은 [여기](http://wxpython.org/download.php#msw)에서 다운 받을 �
 
 이렇게 pip로 설치할 경우 시간이 오래 걸릴 수도 있습니다. 그것이 싫은 사람은 [numpy](http://sourceforge.net/projects/numpy/files/NumPy)를 아래 사이트에서 받아서 설치 할 수도 있습니다. windows version은 바로 python에 lib 폴더로 들어가도록 되어 있습니다.
 
+## <a name="installing-scipy"></a>Installing SciPy
+
+[여기](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy)에서 파이썬 2.7.x.x에 맞는 바이너리를 다운로드 받아서 설치합니다. 저는 [Scipy-stack](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy-stack)을 다운로드 받아서 설치했습니다.
