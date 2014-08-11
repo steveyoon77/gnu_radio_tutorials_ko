@@ -1,10 +1,10 @@
 # <a name="introduction"><a>Introduction
 
-이 문서는 윈도에서 PyQt4를 이용하여 GNU Radio application을 작성하는 방법에 대해서 정리합니다.
+이 문서는 윈도에서 wxPython을 이용하여 GNU Radio application을 작성하는 방법에 대해서 정리합니다.
 
 # <a name="dependancy"></a>
 
-PyQt를 이용한 GNU Radio GUI 응용 프로그램을 개발하기 위해서 미리 설치해야 하는 소프트웨어들이 있습니다.
+wxPython을 이용한 GNU Radio GUI 응용 프로그램을 개발하기 위해서 미리 설치해야 하는 소프트웨어들이 있습니다.
 
 ## <a name="installing-python27"></a>Installing Python 2.7
 
@@ -112,6 +112,10 @@ wxPython은 [여기](http://wxpython.org/download.php#msw)에서 다운 받을 �
 	Successfully installed pyparsing
 	Cleaning up...
 
+### <a name="installing-pyserial"></a>Installing pyserial
+
+[RTL SDR Scanner](https://github.com/EarToEarOak/RTLSDR-Scanner)를 테스트 해보기 위해 필요한 종속적인 모듈 라이브러리입니다.
+
 ### <a name="installing-numpy-module"></a>Installing numpy module
 
 파이썬 모듈 중 하나인 numpy를 설치합니다.
@@ -123,3 +127,4 @@ wxPython은 [여기](http://wxpython.org/download.php#msw)에서 다운 받을 �
 ## <a name="installing-scipy"></a>Installing SciPy
 
 [여기](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy)에서 파이썬 2.7.x.x에 맞는 바이너리를 다운로드 받아서 설치합니다. 저는 [Scipy-stack](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy-stack)을 다운로드 받아서 설치했습니다.
+
