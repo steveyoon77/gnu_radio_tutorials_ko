@@ -128,3 +128,7 @@ wxPython은 [여기](http://wxpython.org/download.php#msw)에서 다운 받을 �
 
 [여기](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy)에서 파이썬 2.7.x.x에 맞는 바이너리를 다운로드 받아서 설치합니다. 저는 [Scipy-stack](http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy-stack)을 다운로드 받아서 설치했습니다.
 
+# <a name="python-syntax"></a>Python Syntax
+![파이썬 프로그래밍](python/images/python-wxpython/slide1.jpg)\
+
+이 장에서는 파이썬 프로그래밍을 위한 문법과 예제를 다룹니다.
