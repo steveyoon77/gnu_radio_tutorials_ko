@@ -390,3 +390,53 @@ class method도 같은 방식으로 고쳐 쓸 수 있습니다.
 
 	class ADeriv(ABase):
 	    pass
+
+## <a name="python-programming"></a>Python Programming
+파이썬 프로그래밍 실습은 네이버 D2 제10회(2014-08-26) 대학생 세미나에서 김종찬 님께서 [발표](http://www.slideshare.net/deview/d2140)하신 내용을 허락 받고 전재 하였습니다.
+
+![실습0](python/images/python-wxpython/slide-27.jpg)\
+![실습1](python/images/python-wxpython/slide-28.jpg)\
+![실습2](python/images/python-wxpython/slide-29.jpg)\
+![실습3](python/images/python-wxpython/slide-30.jpg)\
+![실습4](python/images/python-wxpython/slide-31.jpg)\
+![실습5](python/images/python-wxpython/slide-32.jpg)\
+![실습6](python/images/python-wxpython/slide-33.jpg)\
+![실습7](python/images/python-wxpython/slide-34.jpg)\
+![실습8](python/images/python-wxpython/slide-35.jpg)\
+![실습9](python/images/python-wxpython/slide-36.jpg)\
+![실습10](python/images/python-wxpython/slide-37.jpg)\
+![실습11](python/images/python-wxpython/slide-38.jpg)\
+![실습12](python/images/python-wxpython/slide-39.jpg)\
+![실습13](python/images/python-wxpython/slide-40.jpg)\
+![실습14](python/images/python-wxpython/slide-41.jpg)\
+![실습15](python/images/python-wxpython/slide-42.jpg)\
+![실습16](python/images/python-wxpython/slide-43.jpg)\
+![실습17](python/images/python-wxpython/slide-44.jpg)\
+![실습18](python/images/python-wxpython/slide-45.jpg)\
+![실습19](python/images/python-wxpython/slide-46.jpg)\
+![실습20](python/images/python-wxpython/slide-47.jpg)\
+![실습21](python/images/python-wxpython/slide-48.jpg)\
+![실습22](python/images/python-wxpython/slide-49.jpg)\
+![실습23](python/images/python-wxpython/slide-50.jpg)\
+![실습24](python/images/python-wxpython/slide-51.jpg)\
+![실습25](python/images/python-wxpython/slide-52.jpg)\
+![실습26](python/images/python-wxpython/slide-53.jpg)\
+![실습27](python/images/python-wxpython/slide-54.jpg)\
+![실습28](python/images/python-wxpython/slide-54.jpg)\
+![실습29](python/images/python-wxpython/slide-55.jpg)\
+![실습30](python/images/python-wxpython/slide-56.jpg)\
+![실습31](python/images/python-wxpython/slide-57.jpg)\
+![실습32](python/images/python-wxpython/slide-58.jpg)\
+![실습33](python/images/python-wxpython/slide-59.jpg)\
+![실습34](python/images/python-wxpython/slide-60.jpg)\
+![실습35](python/images/python-wxpython/slide-61.jpg)\
+![실습36](python/images/python-wxpython/slide-62.jpg)\
+![실습37](python/images/python-wxpython/slide-63.jpg)\
+![실습38](python/images/python-wxpython/slide-64.jpg)\
+![실습39](python/images/python-wxpython/slide-65.jpg)\
+![실습40](python/images/python-wxpython/slide-66.jpg)\
+![실습41](python/images/python-wxpython/slide-67.jpg)\
+![실습42](python/images/python-wxpython/slide-68.jpg)\
+![실습43](python/images/python-wxpython/slide-69.jpg)\
+![실습44](python/images/python-wxpython/slide-70.jpg)\
+![실습45](python/images/python-wxpython/slide-71.jpg)\
