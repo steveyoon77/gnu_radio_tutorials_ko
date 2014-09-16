@@ -4,7 +4,7 @@
 
 이 문서는 윈도에서 wxPython을 이용하여 GNU Radio application을 작성하는 방법에 대해서 정리합니다.
 
-# <a name="dependancy"></a>
+# <a name="dependancy"></a>Dependancy
 
 wxPython을 이용한 GNU Radio GUI 응용 프로그램을 개발하기 위해서 미리 설치해야 하는 소프트웨어들이 있습니다.
 
@@ -357,3 +357,36 @@ static method에서는 이렇게 할 수가 없습니다.[^4]
 
 [^4]: 아니면 어쩌지?
 
+### <a name="python-decorator"></a>Decorator
+![Decorator](python/images/python-wxpython/slide-26.jpg)\
+
+Decorator는 일종의 [Syntactic sugar](http://en.wikipedia.org/wiki/Syntactic_sugar)로서 코드의 Readibility를 높여주는 문법 요소입니다. 슬라이드의 **Syntax**에서 보이듯이 중간 구분선 위의 코드는 아래의 코드와 동일한 의미를 갖게 됩니다.
+그래서 wrapper function을 만든다거나 static method와 class method를 만들 때 사용할 수 있습니다.
+wrapper function을 만드는 것은 슬라이드의 **Example**을 참고하시면 됩니다.
+static method와 class method를 만드는 방법은 [Static and Class methods])(#static-class-method)에서 보인 예를 가지고 살펴 보겠습니다.
+
+먼저 static method는 아래와 같이 만들었었습니다.
+
+	class AClass(object):
+	    def astatic( ): 
+	        print(“a static method”)
+	    astatic = staticmethod(astatic)
+
+이 코드를 Decorator를 사용하여 아래와 같이 바꿀 수 있습니다.
+
+	class AClass(object):
+		@staticmethod
+	    def astatic( ): 
+	        print(“a static method”)
+
+왠지 astatic 함수가 static method라는 사실이 더 분명히 와닿는 것 같습니다.
+
+class method도 같은 방식으로 고쳐 쓸 수 있습니다.
+
+	class ABase(object):
+		@classmethod
+	    def aclassmet(cls): 
+	        print(“a class method for %s” % cls.__name__)
+
+	class ADeriv(ABase):
+	    pass
